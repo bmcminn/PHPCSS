@@ -28,6 +28,8 @@ This makes segmenting your CSS very easy and all included file dependencies are 
 
 *update_stylesheet.wp.php:*
 
+---
+
 ## LICENSE:
 
 ### Copyright: (c) 2011-2012 Brandtley McMinn, Gigglebox Studios. - MIT License (MIT)
