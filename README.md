@@ -1,9 +1,5 @@
 # PHP-to-CSS
-_*Author:* Brandtley McMinn_
-
-_*URI:* http://giggleboxstudios.net_
-
-_*Blog:* http://the-soapbox.info/_
+_ *Author:* Brandtley McMinn || http://giggleboxstudios.net_
 
 ## DESCRIPTION:
 
