@@ -1,5 +1,5 @@
 # PHP-to-CSS
-_ *Author:* Brandtley McMinn || http://giggleboxstudios.net_
+*Author:* Brandtley McMinn -- http://giggleboxstudios.net
 
 ## DESCRIPTION:
 
