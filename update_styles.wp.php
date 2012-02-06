@@ -63,7 +63,7 @@ function auto_generate_stylesheet() {
     // Define our PHP filepath prefixed with 'DOCUMENT_ROOT'
     $php_file       = $css_file.'.php';
 
-    // Get the URI of our "style.css.php" file
+    // Get the contents of our "style.css.php" file
     $php_cont       = file_get_contents($get_stylesheet.'.php');
 
     // Get file MOD times for our PHP and CSS files respectively
@@ -74,11 +74,11 @@ function auto_generate_stylesheet() {
     if ($php_modtime > $css_modtime) :
 
         $css = fopen($css_file,'w');    // Open our CSS file
-        fwrite($css,$php_cont);         // Write the contents of our "style.css.php" URI document to our CSS file
+        fwrite($css,$php_cont);         // Write the contents of our "style.css.php" document to our CSS file
         fclose($css);                   // Close our CSS file
 
     else :
-        // "style.css.php" is not new and we should leave it alone
+        // "style.css.php" has not been updated and we should leave "style.css" alone
 
     endif;
 
