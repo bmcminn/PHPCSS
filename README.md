@@ -1,20 +1,20 @@
 # PHP-to-CSS
 *Author:* Brandtley McMinn -- http://giggleboxstudios.net
 
-## OVERVIEW:
+### OVERVIEW:
 This is a PHP based system for generating CSS dynamically without relying on SASS or SCSS. I wanted a simple way to generate CSS that supported variables, custom functions/mixins and anything else I could think of, like CSS grid generation.
 
 Thusfar, what I've come up with is a simple, self-generating script that unifies ALL your CSS content into one http request and is completely customizable. Enjoi :{P
 
 ---
 
-## INSTALLATION:
+### INSTALLATION:
 
-The script is pretty simple to setup and should only take a couple minutes. I'm still working out kinks to make it setup agnostic, which is tricky considering PHP configs differ from server to server. (See TROUBLESHOOTING should you have issues) 
+The script is pretty simple to setup and should only take a couple minutes. I'm still working out kinks to make it setup agnostic, which is tricky considering PHP configs differ from server to server. (See TROUBLESHOOTING should you have issues)
 
 ---
 
-## TROUBLESHOOTING:
+### TROUBLESHOOTING:
 
 
 ---
