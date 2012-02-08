@@ -8,11 +8,11 @@ Thusfar, what I've come up with is a simple, self-generating script that unifies
 
 ---
 
-### INSTALLATION:
-
+## INSTALLATION:
+===
 The script is pretty simple to setup and should only take a couple minutes. I'm still working out kinks to make it setup agnostic, which is tricky considering PHP configs differ from server to server. (See TROUBLESHOOTING should you have issues)
 
----
+
 
 ### TROUBLESHOOTING:
 
