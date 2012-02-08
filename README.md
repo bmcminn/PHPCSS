@@ -1,37 +1,36 @@
-# PHP-to-CSS
+# PHPCSS
 *Pronounced: "FIXED"*
+
 *Author:* Brandtley McMinn -- http://giggleboxstudios.net
 
 
 ## INSTALLATION:
 I tried to make this as simple to use as possible, so to start you have three (3) main files. (See TROUBLESHOOTING if you have issues)
 
-+ Download the .zip from github ([http://t.co/3IqdI676](http://t.co/3IqdI676))
++ Download the .zip from github ([http://git.io/ES9mpA](http://git.io/ES9mpA))
 + "style.css" - you link to this file in your document's &lt;head&gt; section
 + "style.css.php" - you write your CSS in this file
 + "css_update.php" - you include or require towards to top of any global php resource document in your app or site. I find including it in my functions.php (WordPress or otherwise) works nicely. This updates "style.css" on page load provided it's last mod time is newer than "style.css"
 
 
-- - -
-
 
 ## GETTING STARTED:
-So the idea is simplicity. So once you're up and running, the only file you should need to edit is "style.css.php".
+The idea is simplicity, so the only file you will need to edit is "style.css.php".
 
 Open it up and look over the source.
 
-Basically, follow the commented instructions I've provided within the file itself and don't touch anything above or below sections where noted
+Basically, follow the commented instructions I've provided within the file itself and don't touch anything above or below sections where noted.
 
-ie: /* DON'T EDIT ABOVE/BELOW THIS LINE */
+ie: /* DON'T EDIT [ABOVE/BELOW] THIS LINE */
 
 
 - - -
 
 
 ### AUTHOR'S NOTE:
-This is a PHP based system for generating CSS dynamically without having to configure a CSS preprocessor. I wanted a simple way to generate CSS that supported variables, custom functions/mixins and anything else I could think of and worked across all of my main production platforms, and so I made PHPCSS.
+I made this script because I like to set-and-forget. It's a simple PHP based system for generating CSS in a dynamic fashion without having to configure a CSS preprocessor, manually updating files. I wanted a simple way to generate CSS that supported variables, custom functions/mixins and anything else I could think of and worked across all of my main production platforms, and so I made PHPCSS.
 
-I made this script because I like to set-and-forget. So PHPCSS sports the following features.
+PHPCSS sports the following features.
 
 1. Monitors itself and updates "style.css" when it needs to. (No tedious updating)
 2. Server agnositic, so you can use it on any server that supports PHP. (Most any server does anyway)
@@ -58,6 +57,7 @@ GiggleboxStudios.net
 
 1. Integrate CSSrefresh-like dynamic CSS updates without reloading page via AJAX call to css_update.php. (Similar to [http://cssrefresh.frebsite.nl/](http://cssrefresh.frebsite.nl/))
     - This would eliminate needing to include PHP resources, and result in link a JS file in the &lt;head&gt; section instead.
+2. Possible version control on css_update? (Remove older style.css files to a repo bin for backup purposes)
 
 * I'm open to ideas, so hit me up on here or branch the source and make a change. If I like it, I'll merge it into the master *
 
@@ -80,4 +80,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*
+__THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.__
