@@ -15,9 +15,9 @@ The script is pretty simple to setup and should only take a couple minutes. I'm 
 
 ## FILE STRUCTURE:
 I tried to make this as simple to use as possible, so to start you have three (3) main files.
-*  "style.css" - which you link to in the &lt;head&gt; of your documnent
-*	"style.css.php" - file, which you make your changes to
-*	"css_update.php" - file, that updates "style.css".
++  "style.css" - which you link to in the &lt;head&gt; of your documnent
++	"style.css.php" - file, which you make your changes to
++	"css_update.php" - file, that updates "style.css".
 
 
 
