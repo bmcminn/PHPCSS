@@ -14,6 +14,19 @@ I tried to make this as simple to use as possible, so to start you have three (3
 - - -
 
 
+## GETTING STARTED:
+So the idea is simplicity. So once you're up and running, the only file you should need to edit is "style.css.php".
+
+Open it up and look over the source.
+
+Basically, follow the commented instructions I've provided within the file itself and don't touch anything above or below sections where noted
+
+ie: /* DON'T EDIT ABOVE/BELOW THIS LINE */
+
+
+- - -
+
+
 ### AUTHOR'S NOTE:
 This is a PHP based system for generating CSS dynamically without having to configure a CSS preprocessor. I wanted a simple way to generate CSS that supported variables, custom functions/mixins and anything else I could think of and worked across all of my main production platforms, and so I made PHPCSS.
 
@@ -22,7 +35,7 @@ I made this script because I like to set-and-forget. So PHPCSS sports the follow
 1. Monitors itself and updates "style.css" when it needs to. (No tedious updating)
 2. Server agnositic, so you can use it on any server that supports PHP. (Most any server does anyway)
 3. Concatenates all CSS resources in one file via include/require statements. (Very little HTTP overhead ++good)
-4. Predefined functions to handleL:
+4. Predefined functions that provide:
     - Fontsize and line-height attributes in PX and REM values, (future proof typesetting while being backwards compatible)
     - Vendor prefixed CSS3 attributes with standard attribute
     - Define which vendor prefixes to support via array definition.
