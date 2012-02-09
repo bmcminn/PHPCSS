@@ -27,7 +27,7 @@ Open it up and look over the source.
 
 Basically, follow the commented instructions I've provided within the file itself and don't touch anything above or below sections where noted.
 
-ie: _/* DON'T EDIT [ABOVE/BELOW] THIS LINE */_
+ie: <code>_/* DON'T EDIT [ABOVE/BELOW] THIS LINE */_</code>
 
 When you call a function or a variable, just open up a <code>&lt;?php</code> statement like you normally would and be sure to close it when you're finished.
 
