@@ -6,7 +6,7 @@
 
 blog/portfolio - [http://giggleboxstudios.net](http://giggleboxstudios.net)
 
-twitter - [http://twitter.com/brandtleymcminn](&#64;brandtleymcminn)
+twitter - [http://twitter.com/brandtleymcminn](brandtleymcminn)
 
 
 ## INSTALLATION:
