@@ -2,9 +2,7 @@
 
 *Pronounced: "FIXED"*
 
-*Author:* Brandtley McMinn -
-
-[blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
+*Author:* Brandtley McMinn - [blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
 
 
 ## INSTALLATION:
@@ -75,7 +73,8 @@ GiggleboxStudios.net
     - This would eliminate needing to include PHP resources, in favor of linking a JS file in the &lt;head&gt; section.
 2. Possible version control on <code>css_update.php</code>? (Remove older <code>style.css</code> files to a repo bin for backup purposes)
 3. Double check any possible security exploits... I'm not an expert in this arena, so any help would be greatly appreciated. <code>css_update.php</code> doesn't accept any input values, nor does it read any values defined by the URL, so I don't think injection hacks could be applied.
-_/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */_
+
+__/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */__
 
 
 - - -
