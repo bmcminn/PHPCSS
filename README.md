@@ -9,6 +9,13 @@ blog/portfolio - [http://giggleboxstudios.net](http://giggleboxstudios.net)
 twitter - [http://twitter.com/brandtleymcminn](&#64;brandtleymcminn)
 
 
+## WARNING! | AVISO! | ACHTUNG!
+This script automatically updates targeted files as specified in "css_update.php". I will not assume liability for lost work, source code, materials, directory deletions, etc. __Use at your own risk__.
+
+
+- - -
+
+
 ## INSTALLATION:
 To keep things as simple as possible, dump these files where ever your index file is located.
 
@@ -77,13 +84,6 @@ GiggleboxStudios.net
 2. Possible version control on css_update? (Remove older style.css files to a repo bin for backup purposes)
 
 _/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master */_
-
-
-- - -
-
-
-## WARNING! | AVISO! | ACHTUNG!
-This script automatically updates targeted files as specified in "css_update.php". I will not assume liability for lost work, source code, materials, directory deletions, etc. __Use at your own risk__.
 
 
 - - -
