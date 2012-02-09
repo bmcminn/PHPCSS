@@ -76,7 +76,7 @@ GiggleboxStudios.net
     - This would eliminate needing to include PHP resources, and result in link a JS file in the &lt;head&gt; section instead.
 2. Possible version control on css_update? (Remove older style.css files to a repo bin for backup purposes)
 
-* I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master *
+*I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master*
 
 
 - - -
