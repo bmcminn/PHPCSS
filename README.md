@@ -2,11 +2,13 @@
 
 *Pronounced: "FIXED"*
 
-*Author:* Brandtley McMinn -- [http://giggleboxstudios.net](http://giggleboxstudios.net) - [http://twitter.com/brandtleymcminn](@brandtleymcminn)
+*Author:* Brandtley McMinn -
+blog/portfolio - [http://giggleboxstudios.net](http://giggleboxstudios.net)
+twitter - [http://twitter.com/brandtleymcminn](&#64;brandtleymcminn)
 
 
 ## INSTALLATION:
-To keep things as simple as possible, dump these files whereever your index file is located.
+To keep things as simple as possible, dump these files where ever your index file is located.
 
 + "style.css" - Link to this file in your document's &lt;head&gt; section.
 + "style.css.php" - *ONLY* edit this file.
@@ -15,7 +17,7 @@ To keep things as simple as possible, dump these files whereever your index file
 
 And you're done! Well... Almost.
 
-The next section goes over the finer points of how to get started with it.
+The next section goes over some of the finer points.
 
 
 ## GETTING STARTED:
@@ -27,9 +29,11 @@ Basically, follow the commented instructions I've provided within the file itsel
 
 ie: _/* DON'T EDIT [ABOVE/BELOW] THIS LINE */_
 
-You do this and you'll get along just fine. When you save the file and reload your page, the script does a check to see if "style.css.php" is newer than "style.css". If it is, then we write it's contents to "style.css" and viola!
+When you call a function or a variable, just open up a PHP statement like you normally would and be sure to close it when you're finished.
 
-(See TROUBLESHOOTING if you have issues)
+You do this and things will get along just fine. Save the file and reload your page, the script does a check to see if "style.css.php" is newer than "style.css". If it is, then we write its contents to "style.css" and viola!
+
+(See TROUBLESHOOTING if you have any issues)
 
 
 - - -
