@@ -76,14 +76,21 @@ GiggleboxStudios.net
     - This would eliminate needing to include PHP resources, and result in link a JS file in the &lt;head&gt; section instead.
 2. Possible version control on css_update? (Remove older style.css files to a repo bin for backup purposes)
 
-_/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master*/_
+_/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master */_
+
+
+- - -
+
+
+## WARNING! | AVISO! | ACHTUNG!
+This script automatically updates targeted files as specified in "css_update.php". I will not assume liability for lost work, source code, materials, directory deletions, etc. __Use at your own risk__.
 
 
 - - -
 
 
 ### TROUBLESHOOTING:
-* Waiting for feedback so I know how to support any problems that come with using the script *
+_/** Waiting for feedback so I know how to support any problems that come with using the script */_
 
 
 - - -
