@@ -1,6 +1,6 @@
 # PHPCSS - ([http://git.io/ES9mpA](http://git.io/ES9mpA))
 
-*Pronounced: "FIXED"*
+*Pronounced: "FIX"*
 
 *Author:* Brandtley McMinn - [blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
 
