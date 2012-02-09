@@ -4,18 +4,16 @@
 
 *Author:* Brandtley McMinn -
 
-blog/portfolio - [http://giggleboxstudios.net](http://giggleboxstudios.net)
-
-twitter - [http://twitter.com/brandtleymcminn](brandtleymcminn)
+[blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
 
 
 ## INSTALLATION:
 To keep things as simple as possible, dump these files where ever your index file is located.
 
-+ "style.css" - Link to this file in your document's &lt;head&gt; section.
-+ "style.css.php" - *ONLY* edit this file.
-+ "globals.css.php" - Defines all variables and functions to be used in "style.css.php"
-+ "css_update.php" - Include this document towards to top of any global php resource document in your app or site. I find including it in my functions.php (WordPress or otherwise) works nicely.
++ <code>style.css</code> - Link to this file in your document's <code>&lt;head&gt;</code> section.
++ <code>style.css.php</code> - *ONLY* edit this file.
++ <code>globals.css.php</code> - Defines all variables and functions to be used in <code>style.css.php</code>
++ <code>css_update.php</code> - Include this document towards to top of any global php resource document in your app or site. I find including it in my <code>functions.php</code> (WordPress or otherwise) works nicely.
 
 And you're done! Well... Almost.
 
@@ -23,7 +21,7 @@ The next section goes over some of the finer points.
 
 
 ## GETTING STARTED:
-The idea is simplicity, so the only file you will need to edit is "style.css.php".
+The idea is simplicity, so the only file you will need to edit is <code>style.css</code>.
 
 Open it up and look over the source.
 
@@ -31,9 +29,9 @@ Basically, follow the commented instructions I've provided within the file itsel
 
 ie: _/* DON'T EDIT [ABOVE/BELOW] THIS LINE */_
 
-When you call a function or a variable, just open up a PHP statement like you normally would and be sure to close it when you're finished.
+When you call a function or a variable, just open up a <code>&lt;?php</code> statement like you normally would and be sure to close it when you're finished.
 
-You do this and things will get along just fine. Save the file and reload your page, the script does a check to see if "style.css.php" is newer than "style.css". If it is, then we write its contents to "style.css" and viola!
+You do this and things will get along just fine. Save the file and reload your page, the script does a check to see if <code>style.css.php</code> is newer than <code>style.css</code>. If it is, then we write its contents to <code>style.css</code> and viola!
 
 (See TROUBLESHOOTING if you have any issues)
 
@@ -46,18 +44,18 @@ I made this script because I like to set-and-forget things. It's a simple PHP ba
 
 PHPCSS sports the following features.
 
-1. Monitors itself and updates "style.css" when it needs to. (No tedious, manual updating)
-2. Server agnositic, so you can use it on any server that supports PHP. (Most any server does anyway)
+1. Monitors itself and updates <code>style.css</code> when it needs to. (No tedious, manual updating)
+2. Server agnositic, so you can use it on any server that supports PHP4/5. (Most any server does anyway)
 3. Concatenates all CSS resources in one file via include/require statements. (Very little HTTP overhead ++good)
 4. Predefined functions that provide:
-    - Fontsize and line-height attributes in PX and REM values, (future proof typesetting while being backwards compatible)
+    - <code>fontsize</code> and <code>line-height</code> attributes in PX and REM values, (future proof typesetting while being backwards compatible)
     - Define which vendor prefixes to support via array definition.
-    - Vendor prefixed CSS3 attributes with standard attribute.
-5. Push your site live with one code change. Comment out the reference to "style.css.php" and you're good to go since you already reference the "style.css" in your document &lt;head&gt;
+    - Vendor prefixed CSS3 attributes with standard attribute definition.
+5. Push your site live with one code change. Comment out the reference to <code>style.css.php</code> and you're good to go since you already reference the <code>style.css</code> in your document &lt;head&gt;
 
-I'm providing this script since I feel this is a cleaner approach to CSS preprocessing that doesn't require learning a new syntax or frustrating setup issues, and because I wanted to give back to the greater web/dev community for all the help and inspiration I've received over the years.
+I'm providing this script because this is a cleaner approach to CSS preprocessing that doesn't require learning a new syntax or frustrating setup issues and because I want to give back to the greater web/dev community for all the help and inspiration I've received over the years.
 
-If you use this, Awesome! But I would appreciate you crediting me with a mention on twitter or link back to here.
+If you use this, Awesome! But what would be even better is you crediting me with a mention on twitter or link back to here. I'd greatly appreciate it and would gladly reciprocate.
 
 Please submit feedback or fork the scripts if you have improvements you wish to make.
 
@@ -72,11 +70,11 @@ GiggleboxStudios.net
 
 ### TO-DO LIST:
 
-1. Integrate CSSrefresh-like dynamic CSS updates without reloading page via AJAX call to css_update.php. (Similar to [http://cssrefresh.frebsite.nl/](http://cssrefresh.frebsite.nl/))
-    - This would eliminate needing to include PHP resources, and result in link a JS file in the &lt;head&gt; section instead.
+1. Integrate dynamic CSS updates without reloading page via AJAX call to <code>css_update.php</code>. (Similar to [http://cssrefresh.frebsite.nl/](http://cssrefresh.frebsite.nl/))
+    - This would eliminate needing to include PHP resources, in favor of linking a JS file in the &lt;head&gt; section instead.
 2. Possible version control on css_update? (Remove older style.css files to a repo bin for backup purposes)
-
-_/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master */_
+3. Double check any possible security exploits... I'm not an expert in this arena, so any help would be greatly appreciated. <code>css_update.php</code> doesn't accept any input values, nor does it read any values defined by the URL, so I don't think injection hacks could be applied.
+_/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */_
 
 
 - - -
