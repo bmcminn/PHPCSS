@@ -2,14 +2,15 @@
 
 *Pronounced: "FIXED"*
 
-*Author:* Brandtley McMinn -- http://giggleboxstudios.net
+*Author:* Brandtley McMinn -- [http://giggleboxstudios.net](http://giggleboxstudios.net) - [http://twitter.com/brandtleymcminn](@brandtleymcminn)
 
 
 ## INSTALLATION:
-To keep things as simple as possible, dump these three files whereever your index.(html|php|html|etc) file is located.
+To keep things as simple as possible, dump these files whereever your index file is located.
 
 + "style.css" - Link to this file in your document's &lt;head&gt; section.
 + "style.css.php" - *ONLY* edit this file.
++ "globals.css.php" - Defines all variables and functions to be used in "style.css.php"
 + "css_update.php" - Include this document towards to top of any global php resource document in your app or site. I find including it in my functions.php (WordPress or otherwise) works nicely.
 
 And you're done! Well... Almost.
@@ -48,9 +49,9 @@ PHPCSS sports the following features.
     - Vendor prefixed CSS3 attributes with standard attribute.
 5. Push your site live with one code change. Comment out the reference to "style.css.php" and you're good to go since you already reference the "style.css" in your document &lt;head&gt;
 
-I feel this is a cleaner approach to CSS preprocessing that doesn't require learning a new syntax or frustrating setup issues. I'm providing this script because I wanted to give back to the greater web/dev community for all the help and inspiration I've received over the years and hopefully you enjoy using this.
+I'm providing this script since I feel this is a cleaner approach to CSS preprocessing that doesn't require learning a new syntax or frustrating setup issues, and because I wanted to give back to the greater web/dev community for all the help and inspiration I've received over the years.
 
-If you use this, Awesome! But I would appreciate you crediting me with a mention or link back to here.
+If you use this, Awesome! But I would appreciate you crediting me with a mention on twitter or link back to here.
 
 Please submit feedback or fork the scripts if you have improvements you wish to make.
 
