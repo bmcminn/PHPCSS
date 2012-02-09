@@ -62,6 +62,7 @@ Please submit feedback or fork the scripts if you have improvements you wish to 
 Peace,
 
 Brandtley McMinn
+
 GiggleboxStudios.net
 
 
@@ -70,9 +71,9 @@ GiggleboxStudios.net
 
 ### TO-DO LIST:
 
-1. Integrate dynamic CSS updates without reloading page via AJAX call to <code>css_update.php</code>. (Similar to [http://cssrefresh.frebsite.nl/](http://cssrefresh.frebsite.nl/))
-    - This would eliminate needing to include PHP resources, in favor of linking a JS file in the &lt;head&gt; section instead.
-2. Possible version control on css_update? (Remove older style.css files to a repo bin for backup purposes)
+1. Integrate dynamic CSS updates without reloading page, via AJAX call to <code>css_update.php</code>. (Similar to [http://cssrefresh.frebsite.nl/](http://cssrefresh.frebsite.nl/))
+    - This would eliminate needing to include PHP resources, in favor of linking a JS file in the &lt;head&gt; section.
+2. Possible version control on <code>css_update.php</code>? (Remove older <code>style.css</code> files to a repo bin for backup purposes)
 3. Double check any possible security exploits... I'm not an expert in this arena, so any help would be greatly appreciated. <code>css_update.php</code> doesn't accept any input values, nor does it read any values defined by the URL, so I don't think injection hacks could be applied.
 _/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */_
 
