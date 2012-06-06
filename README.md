@@ -1,80 +1,73 @@
-# PHPCSS - ([http://git.io/ES9mpA](http://git.io/ES9mpA))
-
-*Pronounced: "FIX"*
+# PHPCSS - verb - \'fiks\ ([http://git.io/ES9mpA](http://git.io/ES9mpA))
 
 *Author:* Brandtley McMinn - [blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
 
 
+## DESCRIPTION:
+PHPCSS is a CSS psuedo-processor class built on PHP.
+
+I designed it to be:
+
+1. Server environment agnostic - PHP runs on virtually ANY server stack
+2. Simple setup - Pretty much plug'n'play here
+3. Simple syntax so you can hit the ground running.
+
+
 ## INSTALLATION:
-To keep things as simple as possible, dump these files where ever your index file is located.
+Copy the repo contents into your project root folder and add the following CSS reference in your root document's <code>&lt;head&gt;</code> section:
 
-+ <code>style.css</code> - Link to this file in your document's <code>&lt;head&gt;</code> section.
-+ <code>style.css.php</code> - *ONLY* edit this file.
-+ <code>globals.css.php</code> - Defines all variables and functions to be used in <code>style.css.php</code>
-+ <code>css_update.php</code> - Include this document towards to top of any global php resource document in your app or site. I find including it in my <code>functions.php</code> (WordPress or otherwise) works nicely.
+<code><link rel="stylesheet" type="text/css" href="style.css.php"></code>
 
-And you're done! Well... Almost.
-
-The next section goes over some of the finer points.
+That's it!
 
 
-## GETTING STARTED:
-The idea is simplicity, so the only file you will need to edit is <code>style.css</code>.
+## CLASS VARIABLES:
+* Array: <code>$vendors</code> - Defines an array of vendor prefixes you wish to support
 
-Open it up and look over the source.
 
-Basically, follow the commented instructions I've provided within the file itself and don't touch anything above or below sections where noted.
+## CLASS METHODS:
+* Public: <code>prefixit($attr,$args,$impt=null)</code> - Iterates through the $vendors array and echoes the appropriate prefixed CSS
+  * Public: <code>border_radius($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values
+  * Public: <code>box_shadow($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values
+  * Public: <code>gradient($type,$args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values
 
-ie: <code>_/* DON'T EDIT [ABOVE/BELOW] THIS LINE */_</code>
 
-When you call a function or a variable, just open up a <code>&lt;?php</code> statement like you normally would and be sure to close it when you're finished.
+## GENERAL USE:
+The <code>style.css.php</code> file is where you will edit and save your styles to, and has some examples of how to use the syntax. Feel free to edit it to your hearts content, however if you feel you need to add something to the <code>PHPCSS class</code>, please do so as a class extension per the example I've provided.
 
-You do this and things will get along just fine. Save the file and reload your page, the script does a check to see if <code>style.css.php</code> is newer than <code>style.css</code>. If it is, then we write its contents to <code>style.css</code> and viola!
+Use untested methods at your own risk. Future updates/merges will be provided in the <code>class.PHPCSS.php</code> file only.
 
-(See TROUBLESHOOTING if you have any issues)
+I'll expand more here in future iterations ;)
+
+
+## TODO LIST: (Last updated 6/6/2012)
+* Add Method: <code>set_vendors</code> - Setter method to define custom array of supported vendor prefixes
+* Add Method: <code>fontface</code> - Method that iterates through a font list array to output an properly formatted @font-face list
+* Add Method: <code>font_size</code> - Method that outputs pt, px and rem values for fontsize and line-height attributes
+* Refactor Method: <code>gradient()</code> - Ideally this is supposed to wrap the prefixit() method, but the [gradient syntax](https://developer.mozilla.org/en/CSS/linear-gradient) requires the use of <code>background-image</code> as the attribute.
+* Add Method: <code>generate_source()</code> - This would be a <code>private</code> magic function that would copy the generated source, minify it and dump it into a standard <code>style.css</code> file
+
+__/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */__
+
 
 
 - - -
 
 
 ### AUTHOR'S NOTE:
-I made this script because I like to set-and-forget things. It's a simple PHP based system for generating CSS in a dynamic fashion without having to configure a CSS preprocessor or manually updating files. I wanted a simple way to generate CSS that supported variables, custom functions/mixins and anything else I could think of and worked across all of my main production platforms, and so I made PHPCSS.
-
-PHPCSS sports the following features.
-
-1. Monitors itself and updates <code>style.css</code> when it needs to. (No tedious, manual updating)
-2. Server agnositic, so you can use it on any server that supports PHP4/5. (Most any server does anyway)
-3. Concatenates all CSS resources in one file via include/require statements. (Very little HTTP overhead ++good)
-4. Predefined functions that provide:
-    - <code>fontsize</code> and <code>line-height</code> attributes in PX and REM values, (future proof typesetting while being backwards compatible)
-    - Define which vendor prefixes to support via array definition.
-    - Vendor prefixed CSS3 attributes with standard attribute definition.
-5. Push your site live with one code change. Comment out the reference to <code>style.css.php</code> and you're good to go since you already reference the <code>style.css</code> in your document &lt;head&gt;
+I love using this system over systems like SASS or LESS... mostly because I don't have to conform to their formatting paradigm and setting up ruby on Windows is a bit tricky...
 
 I'm providing this script because this is a cleaner approach to CSS preprocessing that doesn't require learning a new syntax or frustrating setup issues and because I want to give back to the greater web/dev community for all the help and inspiration I've received over the years.
 
-If you use this, Awesome! But what would be even better is you crediting me with a mention on twitter or link back to here. I'd greatly appreciate it and would gladly reciprocate.
+If you use this, Awesome! But what would be even better is if you credit me with a mention on twitter or link back to here. I'd greatly appreciate it and would gladly reciprocate.
 
-Please submit feedback or fork the scripts if you have improvements you wish to make.
+Please submit feedback to [labs@giggleboxstudios.net](mailto:labs@giggleboxstudios.net?subject=PHPCSS Suggestion(s)) or fork the scripts if you have improvements you wish to make.
 
 Peace,
 
 Brandtley McMinn
 
 GiggleboxStudios.net
-
-
-- - -
-
-
-### TO-DO LIST:
-
-1. Integrate dynamic CSS updates without reloading page, via AJAX call to <code>css_update.php</code>. (Similar to [http://cssrefresh.frebsite.nl/](http://cssrefresh.frebsite.nl/))
-    - This would eliminate needing to include PHP resources, in favor of linking a JS file in the &lt;head&gt; section.
-2. Possible version control on <code>css_update.php</code>? (Remove older <code>style.css</code> files to a repo bin for backup purposes)
-3. Double check any possible security exploits... I'm not an expert in this arena, so any help would be greatly appreciated. <code>css_update.php</code> doesn't accept any input values, nor does it read any values defined by the URL, so I don't think injection hacks could be applied.
-
-__/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */__
 
 
 - - -
