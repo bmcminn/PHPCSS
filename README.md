@@ -1,4 +1,4 @@
-# PHPCSS - verb - \'fiks\ ([http://git.io/ES9mpA](http://git.io/ES9mpA))
+# PHPCSS - verb - \'fiks\ ([https://github.com/bmcminn/PHPCSS](https://github.com/bmcminn/PHPCSS))
 
 *Author:* Brandtley McMinn - [blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
 
@@ -37,14 +37,14 @@ That's it!
 
 ## GENERAL USE:
 ### NOTE:
-*This is not intended to run in a production environment!*
+__*This is not intended to run in a production environment!*__
 I've had numerous issues with PHP config errors and page header errors going from my local server to my live web server, so the time being, I advise you only use this in a development environment and copy/paste a static CSS file when you're ready to push live.
 
 - - -
 
 The <code>style.css.php</code> file is where you will edit and save your styles to, and has some examples of how to use the syntax. Feel free to edit it to your hearts content, however if you feel you need to add something to the <code>PHPCSS class</code>, please do so as a class extension per the example I've provided.
 
-Use untested methods at your own risk. Future updates/merges will be provided in the <code>class.PHPCSS.php</code> file only.
+__Use untested methods at your own risk!__ Future updates/merges will be provided in the <code>class.PHPCSS.php</code> file only.
 
 I'll expand more here in future iterations ;)
 
