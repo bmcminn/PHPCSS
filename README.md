@@ -16,23 +16,32 @@ I designed it to be:
 ## INSTALLATION:
 Copy the repo contents into your project root folder and add the following CSS reference in your root document's <code>&lt;head&gt;</code> section:
 
-<code><link rel="stylesheet" type="text/css" href="style.css.php"></code>
+<code>&lt;link rel="stylesheet" type="text/css" href="style.css.php"&gt;</code>
 
 That's it!
 
 
-## CLASS VARIABLES:
-* Array: <code>$vendors</code> - Defines an array of vendor prefixes you wish to support
+## CLASS COMPONENTS:
+### VARIABLES:
+* Array: <code>$vendors</code> - Defines an array of vendor prefixes you wish to support.
+  * Defult vendors include (<code>moz</code>,<code>webkit</code>,<code>ms</code>,<code>khtml</code>,<code>o</code>)
 
+- - -
+### METHODS:
+* Public: <code>prefixit($attr,$args,$impt=null)</code> - Iterates through the <code>$vendors</code> array and echoes the appropriate prefixed CSS.
+  * Public: <code>border_radius($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values.
+  * Public: <code>box_shadow($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values.
+  * Public: <code>gradient($type,$args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values.
 
-## CLASS METHODS:
-* Public: <code>prefixit($attr,$args,$impt=null)</code> - Iterates through the $vendors array and echoes the appropriate prefixed CSS
-  * Public: <code>border_radius($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values
-  * Public: <code>box_shadow($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values
-  * Public: <code>gradient($type,$args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values
-
+- - -
 
 ## GENERAL USE:
+### NOTE:
+*This is not intended to run in a production environment!*
+I've had numerous issues with PHP config errors and page header errors going from my local server to my live web server, so the time being, I advise you only use this in a development environment and copy/paste a static CSS file when you're ready to push live.
+
+- - -
+
 The <code>style.css.php</code> file is where you will edit and save your styles to, and has some examples of how to use the syntax. Feel free to edit it to your hearts content, however if you feel you need to add something to the <code>PHPCSS class</code>, please do so as a class extension per the example I've provided.
 
 Use untested methods at your own risk. Future updates/merges will be provided in the <code>class.PHPCSS.php</code> file only.
@@ -41,11 +50,11 @@ I'll expand more here in future iterations ;)
 
 
 ## TODO LIST: (Last updated 6/6/2012)
-* Add Method: <code>set_vendors</code> - Setter method to define custom array of supported vendor prefixes
-* Add Method: <code>fontface</code> - Method that iterates through a font list array to output an properly formatted @font-face list
-* Add Method: <code>font_size</code> - Method that outputs pt, px and rem values for fontsize and line-height attributes
-* Refactor Method: <code>gradient()</code> - Ideally this is supposed to wrap the prefixit() method, but the [gradient syntax](https://developer.mozilla.org/en/CSS/linear-gradient) requires the use of <code>background-image</code> as the attribute.
-* Add Method: <code>generate_source()</code> - This would be a <code>private</code> magic function that would copy the generated source, minify it and dump it into a standard <code>style.css</code> file
+* Add Method: <code>set_vendors</code> - Setter method to define custom array of supported vendor prefixes.
+* Add Method: <code>fontface</code> - Method that iterates through a font list array to output a properly formatted @font-face list.
+* Add Method: <code>font_size</code> - Method that outputs <code>pt</code>, <code>px</code> and <code>rem</code> values for <code>fontsize</code> and <code>line-height</code> attributes.
+* Refactor Method: <code>gradient()</code> - Ideally this is supposed to wrap the <code>prefixit()</code> method, but the [gradient syntax](https://developer.mozilla.org/en/CSS/linear-gradient) requires the use of <code>background-image</code> as the attribute.
+* Add Method: <code>generate_source()</code> - This would be a <code>private</code> magic function that would copy the generated source, minify it and dump it into a standard <code>style.css</code> file.
 
 __/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */__
 
@@ -55,13 +64,11 @@ __/** I'm open to ideas, so hit me up on here or fork the source and make a chan
 
 
 ### AUTHOR'S NOTE:
-I love using this system over systems like SASS or LESS... mostly because I don't have to conform to their formatting paradigm and setting up ruby on Windows is a bit tricky...
+I'm providing this script because I love using this system over something like LESS or SASS. I feel it's a cleaner approach to CSS preprocessing that doesn't require learning a new syntax paradigm or frustrating setup issues and because I want to give back to the greater web/dev community for all the help and inspiration I've received over the years.
 
-I'm providing this script because this is a cleaner approach to CSS preprocessing that doesn't require learning a new syntax or frustrating setup issues and because I want to give back to the greater web/dev community for all the help and inspiration I've received over the years.
+If you use this, Awesome! But what would be even better is if you credit me with a mention on [twitter](http://twitter.com/brandtleymcminn) or link back to here. I'd greatly appreciate it and would gladly reciprocate.
 
-If you use this, Awesome! But what would be even better is if you credit me with a mention on twitter or link back to here. I'd greatly appreciate it and would gladly reciprocate.
-
-Please submit feedback to [labs@giggleboxstudios.net](mailto:labs@giggleboxstudios.net?subject=PHPCSS Suggestion(s)) or fork the scripts if you have improvements you wish to make.
+Please submit feedback to [labs@giggleboxstudios.net](mailto:labs@giggleboxstudios.net?subject=PHPCSS Suggestions) or fork the scripts if you have improvements you wish to make.
 
 Peace,
 
