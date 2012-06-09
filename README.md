@@ -33,6 +33,7 @@ That's it!
   * Public: <code>box_shadow($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values.
   * Public: <code>gradient($type,$args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values.
   * Public: <code>fontsize($fontsize,$lineheight,$type='px',$impt=null,$echo=null)</code> - Method designed to output a specified text measurement unit (default is <code>px</code>) and a corresponding <code>rem</code> value. Accepts strings in the form of float values, which have their decimal points removed to create the <code>px</code> integer value.
+  * Private: <code>important($impt)</code> - Private method designed to test whether to output <code>!important</code> or not when declaring an attribute. Accepts a boolean value.
 
 - - -
 

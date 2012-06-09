@@ -74,19 +74,15 @@ class PHPCSS {
     $vendors  = $this->vendors;
     $string = '';
 
-    // If it's important, append !important to our output
-    if (!$impt == null || !$impt == false || !$impt == 0) :
-      $important = ' !important';
-    else :
-      $important = '';
-    endif;
+    // Is this !important...
+    $important = $this->important($impt);
 
     // Iterate through our vendors and concatinate the results
     foreach($vendors as $vendor) {
       $string .= '-'.$vendor.'-'.$attr.': '.$args.$important.'; ';
     }
 
-    $string .= $attr.': '.$args.'; ';
+    $string .= $attr.': '.$args.$important.'; ';
 
     // Return or Echo $string depending on the $echo parameter
     if ($echo == null) :
@@ -160,19 +156,15 @@ class PHPCSS {
     $vendors  = $this->vendors;
     $string   = '';
 
-    // If it's important, append !important to our output
-    if (!$impt == null || !$impt == false || !$impt == 0) :
-      $important = ' !important';
-    else :
-      $important = '';
-    endif;
+    // Is this !important...
+    $important = $this->important($impt);
 
     // Iterate through our vendors and concatinate the results
     foreach($vendors as $vendor) {
       $string .= 'background-image: -'.$vendor.'-'.$attr.'('.$args.')'.$important.'; ';
     }
 
-    $string .= 'background-image: '.$attr.'('.$args.');';
+    $string .= 'background-image: '.$attr.'('.$args.')'.$important.';';
 
     // Return or output our string
     if ($echo == null) :
@@ -202,12 +194,8 @@ class PHPCSS {
 
     $string   = '';
 
-    // If it's important, append !important to our output
-    if (!$impt == null || !$impt == false || !$impt == 0) :
-      $important = ' !important';
-    else :
-      $important = '';
-    endif;
+    // Is this !important...
+    $important = $this->important($impt);
 
     // Take the decimal out of our arguments
     $fontsize_rem = $fontsize;
@@ -234,8 +222,8 @@ class PHPCSS {
 
     // Iterate through our $types and generate the markup
     foreach ($vals as $val) {
-      $string .= $val[0].': '.$val[1].$type.'; ';
-      $string .= $val[0].': '.$val[2].'rem; ';
+      $string .= $val[0].': '.$val[1].$type.$important.'; ';
+      $string .= $val[0].': '.$val[2].'rem'.$important.'; ';
     }
 
     // Return or output our string
@@ -248,6 +236,27 @@ class PHPCSS {
   } // fontsize() {...}
 
 
+
+  /**
+   * Tests and returns if our value is !important or not
+   *
+   * @since   1.1
+   *
+   * @param   bool      $impt           Make it !important
+   *
+   * @return  string
+   *===========================================*/
+  private function important($impt) {
+
+    $important = '';
+
+    // If it's important, append !important to our output
+    if ($impt !== null || $impt !== false || $impt !== 0) :
+      $important = ' !important';
+    endif;
+
+    return $important;
+  } // important()
 
 
 /**=============================================================================
