@@ -28,10 +28,11 @@ That's it!
 
 - - -
 ### METHODS:
-* Public: <code>prefixit($attr,$args,$impt=null)</code> - Iterates through the <code>$vendors</code> array and echoes the appropriate prefixed CSS.
-  * Public: <code>border_radius($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values.
-  * Public: <code>box_shadow($args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values.
-  * Public: <code>gradient($type,$args,$impt=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values.
+* Public: <code>prefixit($attr,$args,$impt=null,$echo=null)</code> - Iterates through the <code>$vendors</code> array and echoes the appropriate prefixed CSS.
+  * Public: <code>border_radius($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values.
+  * Public: <code>box_shadow($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values.
+  * Public: <code>gradient($type,$args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values.
+  * Public: <code>fontsize($fontsize,$lineheight,$type='px',$impt=null,$echo=null)</code> - Method designed to output a specified text measurement unit (default is <code>px</code>) and a corresponding <code>rem</code> value. Accepts strings in the form of float values, which have their decimal points removed to create the <code>px</code> integer value.
 
 - - -
 
@@ -52,7 +53,7 @@ I'll expand more here in future iterations ;)
 ## TODO LIST: (Last updated 6/6/2012)
 * Add Method: <code>set_vendors</code> - Setter method to define custom array of supported vendor prefixes.
 * Add Method: <code>fontface</code> - Method that iterates through a font list array to output a properly formatted @font-face list.
-* Add Method: <code>font_size</code> - Method that outputs <code>pt</code>, <code>px</code> and <code>rem</code> values for <code>fontsize</code> and <code>line-height</code> attributes.
+* ~~Add Method: <code>font_size</code> - Method that outputs <code>pt</code>, <code>px</code> and <code>rem</code> values for <code>fontsize</code> and <code>line-height</code> attributes.~~
 * Refactor Method: <code>gradient()</code> - Ideally this is supposed to wrap the <code>prefixit()</code> method, but the [gradient syntax](https://developer.mozilla.org/en/CSS/linear-gradient) requires the use of <code>background-image</code> as the attribute.
 * Add Method: <code>generate_source()</code> - This would be a <code>private</code> magic function that would copy the generated source, minify it and dump it into a standard <code>style.css</code> file.
 

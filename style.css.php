@@ -6,23 +6,23 @@
 
   // Define custom color/font/directory values
   // NOTE: DON'T CHANGE UNLESS ABSOLUTELY NECESSARY!!!
-  define('CHARSET',       'UTF-8');
-  define('IMG',           'img/');      // Image directory shortcut
-  define('CSS',           'css/');      // CSS directory shortcut
+  define('CHARSET', 'UTF-8');
+  define('IMG', 'img/'); // Image directory shortcut
+  define('CSS', 'css/'); // CSS directory shortcut
 
 
   // Define color palette definitions here
   // NOTE: Change these values at-will
-  define('WHITE',         '#fff');
-  define('BLACK',         '#444');      // Off-black for taste ;)
+  define('WHITE', '#fff');
+  define('BLACK', '#444'); // Off-black for taste ;)
 
-  $graygrey = '#e3e3e3';                // Spell it how you want :P
-  define('GREY',          $graygrey);
-  define('GRAY',          $graygrey);
+  $graygrey = '#e3e3e3'; // Spell it how you want :P
+  define('GREY', $graygrey);
+  define('GRAY', $graygrey);
 
-  define('BLUE',          '#00f');
-  define('RED',           '#f00');
-  define('ORANGE',        '#f90');
+  define('BLUE', '#00f');
+  define('RED', '#f00');
+  define('ORANGE', '#f90');
 
 
 
@@ -45,38 +45,38 @@
 
 
 /**
- *  ------------------------ START YOUR STYLES HERE! ------------------------- *
- */
+* ------------------------ START YOUR STYLES HERE! ------------------------- *
+*/
 
 
 
 /* Use the border_radius wrapper method */
-#test-border-radius                     { <?php $example->border_radius('4px'); ?> }
+#test-border-radius { <?php $example->border_radius('4px'); ?> }
 
 
 /* Use the gradient wrapper method */
-#test-gradient-1                        { <?php $example->gradient('linear','-45deg,'.RED.','.BLUE); ?> }
-#test-gradient-2                        { <?php $example->gradient('radial','-45deg,red,blue'); ?> }
+#test-gradient-1 { <?php $example->gradient('linear','-45deg,'.RED.','.BLUE); ?> }
+#test-gradient-2 { <?php $example->gradient('radial','-45deg,red,blue'); ?> }
 
 
 /* Use the box_shadow wrapper method */
-#test-box-shadow                        { <?php $example->box_shadow('0 2px 0 #bada55',1); ?> }
+#test-box-shadow { <?php $example->box_shadow('0 2px 0 #bada55',1); ?> }
 
 
 /* All previous methods wrap the prefixit() method */
 /* Call this method if you want to get REALLY specific */
-#test-prefixed-styles                   { <?php $example->prefixit('border-radius','5px',1); ?> }
+#test-prefixed-styles { <?php $example->prefixit('border-radius','5px',1); ?> }
 
 
 <?php
 
   /**
-   * Extend PHPCSS() to do whatever you want!
-   *
-   * Use custom class extensions to define your own CSS styles/mixins
-   *
-   *
-   */
+* Extend PHPCSS() to do whatever you want!
+*
+* Use custom class extensions to define your own CSS styles/mixins
+*
+*
+*/
 
   class ExtendedPHPCSS extends PHPCSS {
 
@@ -93,7 +93,7 @@
 ?>
 
 /* Extended PHPCSS class to output custom CSS */
-#test-custom-gradients                  { <?php $extended->custom_gradients(); ?> }
+#test-custom-gradients { <?php $extended->custom_gradients(); ?> }
 
 
 <?php
@@ -105,9 +105,9 @@
 
 
 /**
- * Media Queries
- * @media screen
- */
+* Media Queries
+* @media screen
+*/
 @media screen and (max-width: 980px) {
 
-  } // @media max-width: 980px
+} // @media max-width: 980px

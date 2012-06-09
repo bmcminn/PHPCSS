@@ -5,8 +5,11 @@
  *
  * PHP based CSS pseudo-processor class that supplies numerous helper methods for CSS script generation
  *
- * @package PHPCSS
- * @since 1.0
+ * @package      PHPCSS
+ * @version      1.1
+ * @author       Brandtley McMinn <labs@giggleboxstudios.net>
+ *
+ * Last updated: 06/09/2012
  */
 class PHPCSS {
 
@@ -56,88 +59,193 @@ class PHPCSS {
   /**
    * Prefixes the supplied method with the vendors in our $vendors array
    *
+   * @since   1.1
+   *
    * @uses    $vendors
    *
    * @param   string    $attr   Name of css attribute we're defining
    * @param   string    $args   Attribute definitions
    * @param   bool      $impt   Make it !important
+   * @param   bool      $echo   Echo the output if True
+   *
+   * @return  string
    *===========================================*/
-  function prefixit($attr,$args,$impt=null) {
+  function prefixit($attr,$args,$impt=null,$echo=null) {
     $vendors  = $this->vendors;
+    $string = '';
 
+    // If it's important, append !important to our output
     if (!$impt == null || !$impt == false || !$impt == 0) :
       $important = ' !important';
     else :
       $important = '';
     endif;
 
+    // Iterate through our vendors and concatinate the results
     foreach($vendors as $vendor) {
-      echo ('-'.$vendor.'-'.$attr.': '.$args.$important.'; ');
+      $string .= '-'.$vendor.'-'.$attr.': '.$args.$important.'; ';
     }
 
-    echo $attr.': '.$args.'; ';
+    $string .= $attr.': '.$args.'; ';
 
-  } // prefixit
+    // Return or Echo $string depending on the $echo parameter
+    if ($echo == null) :
+      return $string;
+    else :
+      echo $string;
+    endif;
+
+  } // prefixit() {...}
+
 
 
   /**
    * Outputs vendor prefixed border-radius attributes
+   *
+   * @since   1.0
    *
    * @uses    $vendors
    * @uses    prefixit()
    *
    * @param   string    $args   Array of font names and variants
    * @param   bool      $impt   Make it !important
+   * @param   bool      $echo   Echo the output if True
+   *
+   * @return  string
    *===========================================*/
-  function border_radius($args,$impt=null) {
+  function border_radius($args,$impt=null,$echo=null) {
     $attr   = 'border-radius';
-    $this->prefixit($attr, $args, $impt);
-  }
+    $this->prefixit($attr, $args, $impt, $echo);
+  } // border_radius() {...}
+
 
 
   /**
    * Outputs vendor prefixed border-radius attributes
+   *
+   * @since   1.0
    *
    * @uses    $vendors
    * @uses    prefixit()
    *
    * @param   string    $args   Array of font names and variants
    * @param   bool      $impt   Make it !important
+   * @param   bool      $echo   Echo the output if True
+   *
+   * @return  string
    *===========================================*/
-  function box_shadow($args,$impt = null) {
+  function box_shadow($args,$impt=null,$echo=null) {
     $attr   = 'box-shadow';
-    $this->prefixit($attr, $args, $impt);
-  }
+    $this->prefixit($attr, $args, $impt, $echo);
+  } // box_shadow() {...}
+
 
 
   /**
    * Outputs vendor prefixed linear-gradient attributes
+   *
+   * @since   1.0
    *
    * @uses    $vendors
    *
    * @param   string    $type   Defines LINEAR or RADIAL
    * @param   string    $args   Array of font names and variants
    * @param   bool      $impt   Make it !important
+   * @param   bool      $echo   Echo the output if True
+   *
+   * @return  string
    *===========================================*/
-  function gradient($type,$args,$impt=null) {
-    $attr   = $type.'-gradient';
+  function gradient($type,$args,$impt=null,$echo=null) {
+    $attr     = $type.'-gradient';
     $vendors  = $this->vendors;
+    $string   = '';
 
+    // If it's important, append !important to our output
     if (!$impt == null || !$impt == false || !$impt == 0) :
       $important = ' !important';
     else :
       $important = '';
     endif;
 
+    // Iterate through our vendors and concatinate the results
     foreach($vendors as $vendor) {
-      echo ('background-image: -'.$vendor.'-'.$attr.'('.$args.')'.$important.'; ');
+      $string .= 'background-image: -'.$vendor.'-'.$attr.'('.$args.')'.$important.'; ';
     }
 
-    echo 'background-image: '.$attr.'('.$args.'); ';
+    $string .= 'background-image: '.$attr.'('.$args.');';
 
-  }
+    // Return or output our string
+    if ($echo == null) :
+      return $string;
+    else :
+      echo $string;
+    endif;
+
+  } // gradient() {...}
 
 
+
+  /**
+   * Outputs a respective values for font-size and line-height attributes as px/pt with REM fallback
+   *
+   * @since   1.1
+   *
+   * @param   string    $fontsize       String value denoted as a float value with leading zero delimitation
+   * @param   string    $lineheight     String value denoted as a float value with leading zero delimitation
+   * @param   string    $type           Defines initial font measurement unit (default is 'px')
+   * @param   bool      $impt           Make it !important
+   * @param   bool      $echo           Echo the output if True
+   *
+   * @return  string
+   *===========================================*/
+  function fontsize($fontsize,$lineheight,$type='px',$impt=null,$echo=null) {
+
+    $string   = '';
+
+    // If it's important, append !important to our output
+    if (!$impt == null || !$impt == false || !$impt == 0) :
+      $important = ' !important';
+    else :
+      $important = '';
+    endif;
+
+    // Take the decimal out of our arguments
+    $fontsize_rem = $fontsize;
+    $fontsize = str_replace('.', '', $fontsize);
+
+    $lineheight_rem = $lineheight;
+    $lineheight = str_replace('.', '', $lineheight);
+
+    // Define the arrays we'll iterate through to generate the markup
+    $vals = array(
+      array(
+        'font-size',
+        $fontsize,
+        $fontsize_rem
+        ),
+      array(
+        'line-height',
+        $lineheight,
+        $lineheight_rem
+        )
+
+      ); // $vals = array
+
+
+    // Iterate through our $types and generate the markup
+    foreach ($vals as $val) {
+      $string .= $val[0].': '.$val[1].$type.'; ';
+      $string .= $val[0].': '.$val[2].'rem; ';
+    }
+
+    // Return or output our string
+    if ($echo == null) :
+      return $string;
+    else :
+      echo $string;
+    endif;
+
+  } // fontsize() {...}
 
 
 
@@ -177,25 +285,6 @@ class PHPCSS {
       echo '.'.$f.' { font-family: \''.$f.'\', sans-serif; }'."\n";
     } // foreach ($f)
   }
-
-
-  /**
-   * FONTSIZE FUNCTION
-   *
-   * @param   $size     font-size to be used with 0 leading decimal delimited float values (eg: 1.2)
-   * @param   $height   line-height to be used with 0 leading decimal delimited float values (eg: 1.2)
-   * @param   bool      $impt   Make it !important
-   *===========================================*/
-
-  function fontsize($size, $height, $impt = null) {
-    $string = "";
-
-    $fpx = str_replace('.','',$size);
-    $lpx = str_replace('.','',$height);
-
-    echo $string =  "font-size: ",$fpx,"px ".$impt."; line-height: ",$lpx,"px ".$impt."; font-size: ",$size,"rem ".$impt."; line-height: ",$height,"rem ".$impt."; ";
-  } // fontsize($fsize,$lheight)
-
 
 
 } // class PHPCSS()
