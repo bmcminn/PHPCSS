@@ -1,5 +1,6 @@
 # PHPCSS - verb - \'fiks\ ([https://github.com/bmcminn/PHPCSS](https://github.com/bmcminn/PHPCSS))
 
+**Version: 1.2**
 *Author:* Brandtley McMinn - [blog/portfolio](http://giggleboxstudios.net) - [@brandtleymcminn](http://twitter.com/brandtleymcminn)
 
 
@@ -14,6 +15,7 @@ I designed it to be:
 
 
 ## INSTALLATION:
+
 Copy the repo contents into your project root folder and add the following CSS reference in your root document's <code>&lt;head&gt;</code> section:
 
 <code>&lt;link rel="stylesheet" type="text/css" href="style.css.php"&gt;</code>
@@ -21,25 +23,11 @@ Copy the repo contents into your project root folder and add the following CSS r
 That's it!
 
 
-## CLASS COMPONENTS:
-### VARIABLES:
-* Array: <code>$vendors</code> - Defines an array of vendor prefixes you wish to support.
-  * Defult vendors include (<code>moz</code>,<code>webkit</code>,<code>ms</code>,<code>khtml</code>,<code>o</code>)
-
-- - -
-### METHODS:
-* Public: <code>prefixit($attr,$args,$impt=null,$echo=null)</code> - Iterates through the <code>$vendors</code> array and echoes the appropriate prefixed CSS.
-  * Public: <code>border_radius($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values.
-  * Public: <code>box_shadow($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values.
-  * Public: <code>gradient($type,$args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values.
-  * Public: <code>fontsize($fontsize,$lineheight,$type='px',$impt=null,$echo=null)</code> - Method designed to output a specified text measurement unit (default is <code>px</code>) and a corresponding <code>rem</code> value. Accepts strings in the form of float values, which have their decimal points removed to create the <code>px</code> integer value.
-  * Private: <code>important($impt)</code> - Private method designed to test whether to output <code>!important</code> or not when declaring an attribute. Accepts a boolean value.
-
-- - -
-
 ## GENERAL USE:
 ### NOTE:
+
 __*This is not intended to run in a production environment!*__
+
 I've had numerous issues with PHP config errors and page header errors going from my local server to my live web server, so the time being, I advise you only use this in a development environment and copy/paste a static CSS file when you're ready to push live.
 
 - - -
@@ -50,22 +38,64 @@ __Use untested methods at your own risk!__ Future updates/merges will be provide
 
 I'll expand more here in future iterations ;)
 
+- - -
 
-## TODO LIST: (Last updated 6/6/2012)
-* Add Method: <code>set_vendors</code> - Setter method to define custom array of supported vendor prefixes.
+
+## CLASS COMPONENTS:
+### VARIABLES:
+
+* Array: <code>$vendors</code> - Defines an array of vendor prefixes you wish to support.
+  * Defult vendors include (<code>moz</code>,<code>webkit</code>,<code>ms</code>,<code>khtml</code>,<code>o</code>)
+
+- - -
+
+
+### METHODS:
+
+* Public: <code>set_vendors($vendors=null)</code> - Assigns an array of supported vendor names to the <code>$vendors</code> class variable.
+* Public: <code>prefixit($attr,$args,$impt=null,$echo=null)</code> - Iterates through the <code>$vendors</code> array and echoes the appropriate prefixed CSS.
+  * Public: <code>border_radius($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>border-radius</code> - accepts a <code>string</code> of shorthand or longhand values.
+  * Public: <code>box_shadow($args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>box-shadow</code> - accepts a <code>string</code> of shorthand or longhand values.
+  * Public: <code>gradient($type,$args,$impt=null,$echo=null)</code> - prefixit() Wrapper method specifically for <code>gradient</code> - accepts a <code>string</code> defining the type of gradient (<code>linear</code> or <code>radial</code>) and a <code>string</code> of shorthand or longhand values.
+  * Public: <code>fontsize($fontsize,$lineheight,$type='px',$impt=null,$echo=null)</code> - Method designed to output a specified text measurement unit (default is <code>px</code>) and a corresponding <code>rem</code> value. Accepts strings in the form of float values, which have their decimal points removed to create the <code>px</code> integer value.
+  * Private: <code>important($impt)</code> - Private method designed to test whether to output <code>!important</code> or not when declaring an attribute. Accepts a boolean value.
+
+- - -
+
+
+## CHANGE LOG:
+
+June 17, 2012
+
+ * Added set_vendors() method.
+ * Updated README.md with appropriate documentation.
+ * Updated __construct to include set_vendors method when initialized.
+ * Fixed source documentation errors.
+ * Psuedo coded the generate_css() method.
+
+06/09/2012:
+
+ * Added fontsize() method
+ * Updated README.md with appropriate documentation
+
+- - -
+
+
+## TODO LIST: (Last updated 6/9/2012)
+
+* ~~Add Method: <code>set_vendors</code> - Setter method to define custom array of supported vendor prefixes.~~
 * Add Method: <code>fontface</code> - Method that iterates through a font list array to output a properly formatted @font-face list.
 * ~~Add Method: <code>font_size</code> - Method that outputs <code>pt</code>, <code>px</code> and <code>rem</code> values for <code>fontsize</code> and <code>line-height</code> attributes.~~
 * Refactor Method: <code>gradient()</code> - Ideally this is supposed to wrap the <code>prefixit()</code> method, but the [gradient syntax](https://developer.mozilla.org/en/CSS/linear-gradient) requires the use of <code>background-image</code> as the attribute.
-* Add Method: <code>generate_source()</code> - This would be a <code>private</code> magic function that would copy the generated source, minify it and dump it into a standard <code>style.css</code> file.
+* Add Method: <code>generate_css()</code> - This would be a <code>private</code> magic function that would copy the generated source, minify it and dump it into a standard <code>style.css</code> file.
 
 __/** I'm open to ideas, so hit me up on here or fork the source and make a change. If I like it, I'll merge it into the master. */__
-
-
 
 - - -
 
 
 ### AUTHOR'S NOTE:
+
 I'm providing this script because I love using this system over something like LESS or SASS. I feel it's a cleaner approach to CSS preprocessing that doesn't require learning a new syntax paradigm or frustrating setup issues and because I want to give back to the greater web/dev community for all the help and inspiration I've received over the years.
 
 If you use this, Awesome! But what would be even better is if you credit me with a mention on [twitter](http://twitter.com/brandtleymcminn) or link back to here. I'd greatly appreciate it and would gladly reciprocate.
@@ -78,15 +108,14 @@ Brandtley McMinn
 
 GiggleboxStudios.net
 
-
 - - -
 
 
 ### TROUBLESHOOTING:
 _/** Waiting for feedback so I know how to support any problems that come with using the script */_
 
-
 - - -
+
 
 ## LICENSE:
 

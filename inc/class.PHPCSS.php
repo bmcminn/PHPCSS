@@ -6,10 +6,23 @@
  * PHP based CSS pseudo-processor class that supplies numerous helper methods for CSS script generation
  *
  * @package      PHPCSS
- * @version      1.1
+ * @version      1.2
  * @author       Brandtley McMinn <labs@giggleboxstudios.net>
  *
- * Last updated: 06/09/2012
+ * Change Log:
+ *
+ *  06/17/2012:
+ *    - Added set_vendors() method
+ *    - Updated README.md with appropriate documentation
+ *
+ *  06/09/2012:
+ *    - Added fontsize() method
+ *    - Updated README.md with appropriate documentation
+ *
+ * Comments:
+ *   ASCII Text headers by : http://www.patorjk.com/software/taag/#p=display&f=Computer&t=methods
+ *     font: Computer
+ *
  */
 class PHPCSS {
 
@@ -40,12 +53,12 @@ class PHPCSS {
 
 
 /**=============================================================================
- *          __  __ ______ _______ _    _  ____  _____   _____
- *         |  \/  |  ____|__   __| |  | |/ __ \|  __ \ / ____|
- *         | \  / | |__     | |  | |__| | |  | | |  | | (___
- *         | |\/| |  __|    | |  |  __  | |  | | |  | |\___ \
- *         | |  | | |____   | |  | |  | | |__| | |__| |____) |
- *         |_|  |_|______|  |_|  |_|  |_|\____/|_____/|_____/
+*
+ *    eeeeeee eeee eeeee e   e eeeee eeeee eeeee
+ *    8  8  8 8      8   8   8 8  88 8   8 8   "
+ *    8e 8  8 8eee   8e  8eee8 8   8 8e  8 8eeee
+ *    88 8  8 88     88  88  8 8   8 88  8    88
+ *    88 8  8 88ee   88  88  8 8eee8 88ee8 8ee88
  *
  * --------------------------------------------------------------------------- *
  *
@@ -62,17 +75,19 @@ class PHPCSS {
    * @since   1.1
    *
    * @uses    $vendors
+   * @uses    important()
    *
-   * @param   string    $attr   Name of css attribute we're defining
-   * @param   string    $args   Attribute definitions
-   * @param   bool      $impt   Make it !important
-   * @param   bool      $echo   Echo the output if True
+   * @param   string    $attr     Name of css attribute we're defining
+   * @param   string    $args     Attribute definitions
+   * @param   bool      $impt     Make it !important
+   * @param   bool      $echo     Echo the output if True
    *
    * @return  string
    *===========================================*/
   function prefixit($attr,$args,$impt=null,$echo=null) {
+
     $vendors  = $this->vendors;
-    $string = '';
+    $string   = '';
 
     // Is this !important...
     $important = $this->important($impt);
@@ -96,6 +111,22 @@ class PHPCSS {
 
 
   /**
+   *  Sets the vendor prefixes we will support in our PHPCSS object
+   *
+   * @since 1.2
+   *
+   * @uses  $vendors description
+   *
+   * @param   array     $vendors  Array defining each browser vendor we plan to support
+   *===========================================*/
+  function set_vendors($vendors = array()) {
+
+    return $this->vendors = $vendors;
+
+  } // set_vendors() {...}
+
+
+  /**
    * Outputs vendor prefixed border-radius attributes
    *
    * @since   1.0
@@ -103,15 +134,18 @@ class PHPCSS {
    * @uses    $vendors
    * @uses    prefixit()
    *
-   * @param   string    $args   Array of font names and variants
-   * @param   bool      $impt   Make it !important
-   * @param   bool      $echo   Echo the output if True
+   * @param   string    $args     Array of font names and variants
+   * @param   bool      $impt     Make it !important
+   * @param   bool      $echo     Echo the output if True
    *
    * @return  string
    *===========================================*/
   function border_radius($args,$impt=null,$echo=null) {
+
     $attr   = 'border-radius';
-    $this->prefixit($attr, $args, $impt, $echo);
+
+    return $this->prefixit($attr, $args, $impt, $echo);
+
   } // border_radius() {...}
 
 
@@ -131,8 +165,11 @@ class PHPCSS {
    * @return  string
    *===========================================*/
   function box_shadow($args,$impt=null,$echo=null) {
+
     $attr   = 'box-shadow';
-    $this->prefixit($attr, $args, $impt, $echo);
+
+    return $this->prefixit($attr, $args, $impt, $echo);
+
   } // box_shadow() {...}
 
 
@@ -143,6 +180,7 @@ class PHPCSS {
    * @since   1.0
    *
    * @uses    $vendors
+   * @uses    important()
    *
    * @param   string    $type   Defines LINEAR or RADIAL
    * @param   string    $args   Array of font names and variants
@@ -152,6 +190,7 @@ class PHPCSS {
    * @return  string
    *===========================================*/
   function gradient($type,$args,$impt=null,$echo=null) {
+
     $attr     = $type.'-gradient';
     $vendors  = $this->vendors;
     $string   = '';
@@ -237,8 +276,27 @@ class PHPCSS {
 
 
 
+
+/**=============================================================================
+ *
+ *    8""""8
+ *    8    8 eeee eeeee eeeee  eeee eeee eeeee eeeee eeee eeeee
+ *    8e   8 8    8   8 8   8  8    8  8 8   8   8   8    8   8
+ *    88   8 8eee 8eee8 8eee8e 8eee 8e   8eee8   8e  8eee 8e  8
+ *    88   8 88   88    88   8 88   88   88  8   88  88   88  8
+ *    88eee8 88ee 88    88   8 88ee 88e8 88  8   88  88ee 88ee8
+ *
+ * ---------------------------------------------------------------------------
+ *
+ * NOTE: The following methods will be deleted in later source revisions...
+ *       Bottom line, don't use them :P
+ *
+ *============================================================================*/
+
   /**
    * Tests and returns if our value is !important or not
+   *
+   * @deprecated  1.2   Not even sure why I bothered putting this in here :P
    *
    * @since   1.1
    *
@@ -251,28 +309,33 @@ class PHPCSS {
     $important = '';
 
     // If it's important, append !important to our output
-    if ($impt !== null || $impt !== false || $impt !== 0) :
+    if ($impt !== null && $impt !== false && $impt !== 0) :
       $important = ' !important';
     endif;
 
     return $important;
+
   } // important()
 
 
+
+
+
+
+
 /**=============================================================================
- *          _    _ _   _ _______ ______  _____ _______ ______ _____
- *         | |  | | \ | |__   __|  ____|/ ____|__   __|  ____|  __ \
- *         | |  | |  \| |  | |  | |__  | (___    | |  | |__  | |  | |
- *         | |  | | . ` |  | |  |  __|  \___ \   | |  |  __| | |  | |
- *         | |__| | |\  |  | |  | |____ ____) |  | |  | |____| |__| |
- *          \____/|_| \_|  |_|  |______|_____/   |_|  |______|_____/
  *
- *          __  __ ______ _______ _    _  ____  _____   _____ _ _ _
- *         |  \/  |  ____|__   __| |  | |/ __ \|  __ \ / ____| | | |
- *         | \  / | |__     | |  | |__| | |  | | |  | | (___ | | | |
- *         | |\/| |  __|    | |  |  __  | |  | | |  | |\___ \| | | |
- *         | |  | | |____   | |  | |  | | |__| | |__| |____) |_|_|_|
- *         |_|  |_|______|  |_|  |_|  |_|\____/|_____/|_____/(_|_|_)
+ *    e   e eeeee eeeee eeee eeeee eeeee eeee eeeee
+ *    8   8 8   8   8   8    8   "   8   8    8   8
+ *    8e  8 8e  8   8e  8eee 8eeee   8e  8eee 8e  8
+ *    88  8 88  8   88  88      88   88  88   88  8
+ *    88ee8 88  8   88  88ee 8ee88   88  88ee 88ee8
+ *
+ *    eeeeeee eeee eeeee e   e eeeee eeeee eeeee
+ *    8  8  8 8      8   8   8 8  88 8   8 8   "
+ *    8e 8  8 8eee   8e  8eee8 8   8 8e  8 8eeee
+ *    88 8  8 88     88  88  8 8   8 88  8    88
+ *    88 8  8 88ee   88  88  8 8eee8 88ee8 8ee88
  *
  * ---------------------------------------------------------------------------
  *
@@ -284,16 +347,22 @@ class PHPCSS {
 
 
   /**
-  * Font family generation script
-  *
-  * @uses   css/font.css.php
-  * @param  array   $fonts  Array of font names and variants
-  *===========================================*/
-  function fonts($fonts) {
-    foreach ($fonts as $f) {
-      echo '.'.$f.' { font-family: \''.$f.'\', sans-serif; }'."\n";
-    } // foreach ($f)
-  }
+   * Called at the end of your file; This method generates a static CSS file ready for production
+   *
+   * @since   1.2
+   *
+   * @param   bool    $minify   Calls the minification script when True to compress the generated CSS file
+   *
+   * @return  null              Outputs a static .css file
+   *===========================================*/
+  function generate_css($minify=null) {
+
+
+
+    return false;
+
+  } // generate_css($minify) {...}
+
 
 
 } // class PHPCSS()
