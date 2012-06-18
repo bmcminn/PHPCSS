@@ -65,7 +65,7 @@ I'll expand more here in future iterations ;)
 
 ## CHANGE LOG:
 
-June 17, 2012
+June 17, 2012:
 
  * Added set_vendors() method.
  * Updated README.md with appropriate documentation.
@@ -73,7 +73,7 @@ June 17, 2012
  * Fixed source documentation errors.
  * Psuedo coded the generate_css() method.
 
-06/09/2012:
+June 9, 2012:
 
  * Added fontsize() method
  * Updated README.md with appropriate documentation

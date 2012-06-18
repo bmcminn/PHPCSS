@@ -14,6 +14,9 @@
  *  06/17/2012:
  *    - Added set_vendors() method
  *    - Updated README.md with appropriate documentation
+ *    - Updated __construct to include set_vendors method when initialized
+ *    - Fixed source documentation errors
+ *    - Psuedo coded the generate_css() method
  *
  *  06/09/2012:
  *    - Added fontsize() method
@@ -25,7 +28,6 @@
  *
  */
 class PHPCSS {
-
 
   /**
    * Supported browser vendor prefixes
@@ -42,12 +44,34 @@ class PHPCSS {
    * Constructor - Not sure what to do here yet...
    *
    * @since 1.0
-   * @return CSS
+   *
+   * @param   array     $assign_vendors   Array defining our vendor prefixes when the object is initialized
+   *
+   * @return false
    *===========================================*/
-  function __construct() {
+  function __construct($assign_vendors = null) {
+
+    // Initialize our $vendors array if provided
+    if ($assign_vendors !== null) :
+
+      $this->vendors = $assign_vendors;
+
+    endif;
 
   } // __construct()
 
+
+  /**
+   * Constructor - Not sure what to do here yet...
+   *
+   * @since 1.2
+   * @return false
+   *===========================================*/
+  function __destruct() {
+
+    return true;
+
+  } // __destruct()
 
 
 
@@ -70,6 +94,27 @@ class PHPCSS {
 
 
   /**
+   *  Sets the vendor prefixes we will support in our PHPCSS object
+   *
+   * @since 1.2
+   *
+   * @uses    function  set_vendors()   Assigns new base vendors array
+   *
+   * @param   array     $vendors        Array defining each browser vendor we plan to support
+   *
+   * @return  false
+   *===========================================*/
+  function set_vendors($vendors = array()) {
+
+    $this->set_vendors($vendors);
+
+    return false;
+
+  } // set_vendors() {...}
+
+
+
+  /**
    * Prefixes the supplied method with the vendors in our $vendors array
    *
    * @since   1.1
@@ -77,10 +122,10 @@ class PHPCSS {
    * @uses    $vendors
    * @uses    important()
    *
-   * @param   string    $attr     Name of css attribute we're defining
-   * @param   string    $args     Attribute definitions
-   * @param   bool      $impt     Make it !important
-   * @param   bool      $echo     Echo the output if True
+   * @param   string      $attr         Name of css attribute we're defining
+   * @param   string      $args         Attribute definitions
+   * @param   bool        $impt         Make it !important
+   * @param   bool        $echo         Echo the output if True
    *
    * @return  string
    *===========================================*/
@@ -97,6 +142,7 @@ class PHPCSS {
       $string .= '-'.$vendor.'-'.$attr.': '.$args.$important.'; ';
     }
 
+    // Assemble output string
     $string .= $attr.': '.$args.$important.'; ';
 
     // Return or Echo $string depending on the $echo parameter
@@ -111,22 +157,6 @@ class PHPCSS {
 
 
   /**
-   *  Sets the vendor prefixes we will support in our PHPCSS object
-   *
-   * @since 1.2
-   *
-   * @uses  $vendors description
-   *
-   * @param   array     $vendors  Array defining each browser vendor we plan to support
-   *===========================================*/
-  function set_vendors($vendors = array()) {
-
-    return $this->vendors = $vendors;
-
-  } // set_vendors() {...}
-
-
-  /**
    * Outputs vendor prefixed border-radius attributes
    *
    * @since   1.0
@@ -134,9 +164,9 @@ class PHPCSS {
    * @uses    $vendors
    * @uses    prefixit()
    *
-   * @param   string    $args     Array of font names and variants
-   * @param   bool      $impt     Make it !important
-   * @param   bool      $echo     Echo the output if True
+   * @param   string      $args         Array of font names and variants
+   * @param   bool        $impt         Make it !important
+   * @param   bool        $echo         Echo the output if True
    *
    * @return  string
    *===========================================*/
@@ -151,16 +181,16 @@ class PHPCSS {
 
 
   /**
-   * Outputs vendor prefixed border-radius attributes
+   * Outputs vendor prefixed box-shadow attributes
    *
    * @since   1.0
    *
    * @uses    $vendors
    * @uses    prefixit()
    *
-   * @param   string    $args   Array of font names and variants
-   * @param   bool      $impt   Make it !important
-   * @param   bool      $echo   Echo the output if True
+   * @param   string      $args         Array of font names and variants
+   * @param   bool        $impt         Make it !important
+   * @param   bool        $echo         Echo the output if True
    *
    * @return  string
    *===========================================*/
@@ -182,10 +212,10 @@ class PHPCSS {
    * @uses    $vendors
    * @uses    important()
    *
-   * @param   string    $type   Defines LINEAR or RADIAL
-   * @param   string    $args   Array of font names and variants
-   * @param   bool      $impt   Make it !important
-   * @param   bool      $echo   Echo the output if True
+   * @param   string      $type         Defines LINEAR or RADIAL
+   * @param   string      $args         Array of font names and variants
+   * @param   bool        $impt         Make it !important
+   * @param   bool        $echo         Echo the output if True
    *
    * @return  string
    *===========================================*/
@@ -203,6 +233,7 @@ class PHPCSS {
       $string .= 'background-image: -'.$vendor.'-'.$attr.'('.$args.')'.$important.'; ';
     }
 
+    // Assemble output string
     $string .= 'background-image: '.$attr.'('.$args.')'.$important.';';
 
     // Return or output our string
@@ -221,11 +252,11 @@ class PHPCSS {
    *
    * @since   1.1
    *
-   * @param   string    $fontsize       String value denoted as a float value with leading zero delimitation
-   * @param   string    $lineheight     String value denoted as a float value with leading zero delimitation
-   * @param   string    $type           Defines initial font measurement unit (default is 'px')
-   * @param   bool      $impt           Make it !important
-   * @param   bool      $echo           Echo the output if True
+   * @param   string      $fontsize     String value denoted as a float value with leading zero delimitation
+   * @param   string      $lineheight   String value denoted as a float value with leading zero delimitation
+   * @param   string      $type         Defines initial font measurement unit (default is 'px')
+   * @param   bool        $impt         Make it !important
+   * @param   bool        $echo         Echo the output if True
    *
    * @return  string
    *===========================================*/
@@ -238,10 +269,10 @@ class PHPCSS {
 
     // Take the decimal out of our arguments
     $fontsize_rem = $fontsize;
-    $fontsize = str_replace('.', '', $fontsize);
+    $fontsize     = str_replace('.', '', $fontsize);
 
     $lineheight_rem = $lineheight;
-    $lineheight = str_replace('.', '', $lineheight);
+    $lineheight   = str_replace('.', '', $lineheight);
 
     // Define the arrays we'll iterate through to generate the markup
     $vals = array(
@@ -255,7 +286,6 @@ class PHPCSS {
         $lineheight,
         $lineheight_rem
         )
-
       ); // $vals = array
 
 
@@ -276,27 +306,8 @@ class PHPCSS {
 
 
 
-
-/**=============================================================================
- *
- *    8""""8
- *    8    8 eeee eeeee eeeee  eeee eeee eeeee eeeee eeee eeeee
- *    8e   8 8    8   8 8   8  8    8  8 8   8   8   8    8   8
- *    88   8 8eee 8eee8 8eee8e 8eee 8e   8eee8   8e  8eee 8e  8
- *    88   8 88   88    88   8 88   88   88  8   88  88   88  8
- *    88eee8 88ee 88    88   8 88ee 88e8 88  8   88  88ee 88ee8
- *
- * ---------------------------------------------------------------------------
- *
- * NOTE: The following methods will be deleted in later source revisions...
- *       Bottom line, don't use them :P
- *
- *============================================================================*/
-
   /**
    * Tests and returns if our value is !important or not
-   *
-   * @deprecated  1.2   Not even sure why I bothered putting this in here :P
    *
    * @since   1.1
    *
@@ -317,6 +328,24 @@ class PHPCSS {
 
   } // important()
 
+
+
+
+/**=============================================================================
+ *
+ *    8""""8
+ *    8    8 eeee eeeee eeeee  eeee eeee eeeee eeeee eeee eeeee
+ *    8e   8 8    8   8 8   8  8    8  8 8   8   8   8    8   8
+ *    88   8 8eee 8eee8 8eee8e 8eee 8e   8eee8   8e  8eee 8e  8
+ *    88   8 88   88    88   8 88   88   88  8   88  88   88  8
+ *    88eee8 88ee 88    88   8 88ee 88e8 88  8   88  88ee 88ee8
+ *
+ * ---------------------------------------------------------------------------
+ *
+ * NOTE: The following methods will be deleted in later source revisions...
+ *       Bottom line, don't use them :P
+ *
+ *============================================================================*/
 
 
 
@@ -351,14 +380,34 @@ class PHPCSS {
    *
    * @since   1.2
    *
-   * @param   bool    $minify   Calls the minification script when True to compress the generated CSS file
+   * @param   bool      $minify         Calls the minification script when True to compress the generated CSS file
    *
-   * @return  null              Outputs a static .css file
+   * @return  bool      false           Outputs a static .css file
    *===========================================*/
   function generate_css($minify=null) {
 
+    // Figure out what directory we're in
+    //   Designate in a variable
+    $source_directory       = '';
+    $destination_directory  = '';
+
+    // Call the source file
+    //   Read in the contents
+
+    // Determine what "header" comment blocks are present and maintain them in a variable
+
+    // Are we minifying the source?
+    if ($minify !== null) :
+
+      // Minify source code
+
+    endif;
+
+    // Write (modified) source to destination file
+    //   Close file
 
 
+    // Don't return anything
     return false;
 
   } // generate_css($minify) {...}
