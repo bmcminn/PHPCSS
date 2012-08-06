@@ -1,0 +1,21 @@
+*                                       { display: block; padding: 1px 29px 0; font-size: 10px; line-height: 20px; }
+#smashing {
+  -webkit-tacos: delicious;
+     -moz-tacos: delicious;
+          tacos: delicious;
+}
+.wootbomb                               { font-style: italic; }
+
+#smashing.wootbomb                      { position: relative; margin: 20px auto; }
+
+#smashing .something[alt~="amazing"]    { background: url(burrito.png) center center repeat; }
+
+
+
+
+leading spaces to open bracket          (\s+\{\s)
+linebreak:                              (\n)
+space after colons and semicolons:      ((:|;) +)
+
+
+\s+(\{)\s+|(\})\n+|(\:) +|(;) +|(;)\n\s+|\r|\n

@@ -1,15 +1,41 @@
 <?php
-
 /**
- * PHPCSS - verb - \'fiks\
+ * PHPCSS - verb - \fiks\ - to put in order or in good condition... (http://dictionary.reference.com/browse/fix)
  *
  * PHP based CSS pseudo-processor class that supplies numerous helper methods for CSS script generation
  *
  * @package      PHPCSS
- * @version      1.2
+ * @version      1.3
  * @author       Brandtley McMinn <labs@giggleboxstudios.net>
+ * @copyright    2011-2012 Brandtley McMinn
+ * @license      http://creativecommons.org/licenses/by-sa/3.0/legalcode - CC BY-SA 3.0
  *
- * Change Log:
+ * @todo
+ *   - Changed method name from generate_css() to generate_stylesheet() for symantic purposes
+ *   - Refactor generate_font_face() to iterate through the defined font directory for all fonts needed instead of having to define an array
+ *
+ *
+ * CHANGE LOG:
+ * -----------------------------------------------------------------------------
+ *
+ *  08/02/2012:
+ *    - Corrected an error in set_vendors() method; running recursive function instead of setting the $vendors class var
+ *    - Added fonts management and generation scripts
+ *      - Added $fonts_dir array variable
+ *      - Added $font_list array variable
+ *      - Added set_fonts_dir() method
+ *      - Added set_font_list() method
+ *      - Added generate_font_face() method for outputting a list of @font-face
+ *    - Added copyright and license spec to script (finally... :P)
+ *
+ *
+ *  07/24/2012:
+ *    - Added _echo() method
+ *      - Changed all method output from 'return' to 'echo' by default (cuz I'm lazy :P)
+ *      - Changed method name from important() to _important() - all private class methods now prefixed with an underscore (_example($args))
+ *    - Updated README.md with appropriate documentation
+ *    - New methods planned out in UNTESTED METHODS section
+ *
  *
  *  06/17/2012:
  *    - Added set_vendors() method
@@ -18,13 +44,26 @@
  *    - Fixed source documentation errors
  *    - Psuedo coded the generate_css() method
  *
+ *
  *  06/09/2012:
  *    - Added fontsize() method
  *    - Updated README.md with appropriate documentation
  *
- * Comments:
+ *
+ *
+ * COMMENTS:
+ * -----------------------------------------------------------------------------
+ *
  *   ASCII Text headers by : http://www.patorjk.com/software/taag/#p=display&f=Computer&t=methods
  *     font: Computer
+ *
+ *
+ *
+ * LICENSE:
+ * -----------------------------------------------------------------------------
+ *
+ * This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/.
  *
  */
 class PHPCSS {
@@ -37,35 +76,34 @@ class PHPCSS {
    * @since 1.0
    * @var array
    */
-  var $vendors = array('moz','webkit','ms','khtml','o');
+  var $vendors    = array('moz','webkit','ms','khtml','o');
+
+  var $fonts_dir  = '';
+
+  // Scheduled for outmoding
+  var $font_list  = array();
 
 
   /**
    * Constructor - Not sure what to do here yet...
-   *
    * @since 1.0
-   *
-   * @param   array     $assign_vendors   Array defining our vendor prefixes when the object is initialized
-   *
+   * @param array     $assign_vendors   If supplied, overrides the vendor prefix array list when the object is initialized
    * @return false
    *===========================================*/
   function __construct($assign_vendors = null) {
 
-    // Initialize our $vendors array if provided
-    if ($assign_vendors !== null) :
-
+    // Override our $vendors array if provided
+    if ($assign_vendors) :
       $this->vendors = $assign_vendors;
-
     endif;
 
   } // __construct()
 
 
   /**
-   * Constructor - Not sure what to do here yet...
-   *
+   * Deconstructor - Not sure what to do here yet...
    * @since 1.2
-   * @return false
+   * @return true
    *===========================================*/
   function __destruct() {
 
@@ -92,16 +130,11 @@ class PHPCSS {
  *
  *============================================================================*/
 
-
   /**
-   *  Sets the vendor prefixes we will support in our PHPCSS object
-   *
-   * @since 1.2
-   *
+   * Sets the vendor prefixes we will support in our PHPCSS object
+   * @since   1.2
    * @uses    function  set_vendors()   Assigns new base vendors array
-   *
-   * @param   array     $vendors        Array defining each browser vendor we plan to support
-   *
+   * @param   array     $vendors[]      Array defining each browser vendor we plan to support
    * @return  false
    *===========================================*/
   function set_vendors($vendors = array()) {
@@ -113,13 +146,40 @@ class PHPCSS {
   } // set_vendors() {...}
 
 
+  /**
+   * Sets our projects font directory
+   * @since   1.3
+   * @param   string      $dir          The directory where our font files are located
+   * @return  false
+   *===========================================*/
+  public function set_fonts_dir($dir = '') {
+
+    $this->fonts_dir = $dir;
+    return false;
+
+  } // set_fonts_dir() {...}
+
+
+  /**
+   * Set the list of fonts from our font directory we should use
+   * @since   1.3
+   * @param   string      $list         Array listing the specific fonts we should load
+   * @return  false
+   *===========================================*/
+  public function set_font_list($list = array()) {
+
+    $this->font_list = $list;
+    return false;
+
+  } // set_fonts_dir() {...}
+
 
   /**
    * Prefixes the supplied method with the vendors in our $vendors array
    *
    * @since   1.1
    *
-   * @uses    $vendors
+   * @uses    $vendors[]
    * @uses    important()
    *
    * @param   string      $attr         Name of css attribute we're defining
@@ -129,13 +189,13 @@ class PHPCSS {
    *
    * @return  string
    *===========================================*/
-  function prefixit($attr,$args,$impt=null,$echo=null) {
+  public function prefixit($attr,$args,$impt=null,$echo=true) {
 
     $vendors  = $this->vendors;
     $string   = '';
 
     // Is this !important...
-    $important = $this->important($impt);
+    $important = $this->_important($impt);
 
     // Iterate through our vendors and concatinate the results
     foreach($vendors as $vendor) {
@@ -145,15 +205,10 @@ class PHPCSS {
     // Assemble output string
     $string .= $attr.': '.$args.$important.'; ';
 
-    // Return or Echo $string depending on the $echo parameter
-    if ($echo == null) :
-      return $string;
-    else :
-      echo $string;
-    endif;
+    // Output our CSS
+    $this->_echo($echo, $string);
 
   } // prefixit() {...}
-
 
 
   /**
@@ -161,7 +216,7 @@ class PHPCSS {
    *
    * @since   1.0
    *
-   * @uses    $vendors
+   * @uses    $vendors[]
    * @uses    prefixit()
    *
    * @param   string      $args         Array of font names and variants
@@ -170,7 +225,7 @@ class PHPCSS {
    *
    * @return  string
    *===========================================*/
-  function border_radius($args,$impt=null,$echo=null) {
+  public function border_radius($args,$impt=null,$echo=true) {
 
     $attr   = 'border-radius';
 
@@ -179,13 +234,12 @@ class PHPCSS {
   } // border_radius() {...}
 
 
-
   /**
    * Outputs vendor prefixed box-shadow attributes
    *
    * @since   1.0
    *
-   * @uses    $vendors
+   * @uses    $vendors[]
    * @uses    prefixit()
    *
    * @param   string      $args         Array of font names and variants
@@ -194,7 +248,7 @@ class PHPCSS {
    *
    * @return  string
    *===========================================*/
-  function box_shadow($args,$impt=null,$echo=null) {
+  public function box_shadow($args,$impt=null,$echo=true) {
 
     $attr   = 'box-shadow';
 
@@ -203,14 +257,13 @@ class PHPCSS {
   } // box_shadow() {...}
 
 
-
   /**
    * Outputs vendor prefixed linear-gradient attributes
    *
    * @since   1.0
    *
-   * @uses    $vendors
-   * @uses    important()
+   * @uses    $vendors[]
+   * @uses    _important()
    *
    * @param   string      $type         Defines LINEAR or RADIAL
    * @param   string      $args         Array of font names and variants
@@ -219,14 +272,14 @@ class PHPCSS {
    *
    * @return  string
    *===========================================*/
-  function gradient($type,$args,$impt=null,$echo=null) {
+  public function gradient($type,$args,$impt=null,$echo=true) {
 
     $attr     = $type.'-gradient';
     $vendors  = $this->vendors;
     $string   = '';
 
     // Is this !important...
-    $important = $this->important($impt);
+    $important = $this->_important($impt);
 
     // Iterate through our vendors and concatinate the results
     foreach($vendors as $vendor) {
@@ -236,15 +289,10 @@ class PHPCSS {
     // Assemble output string
     $string .= 'background-image: '.$attr.'('.$args.')'.$important.';';
 
-    // Return or output our string
-    if ($echo == null) :
-      return $string;
-    else :
-      echo $string;
-    endif;
+    // Output our CSS
+    $this->_echo($echo, $string);
 
   } // gradient() {...}
-
 
 
   /**
@@ -254,25 +302,24 @@ class PHPCSS {
    *
    * @param   string      $fontsize     String value denoted as a float value with leading zero delimitation
    * @param   string      $lineheight   String value denoted as a float value with leading zero delimitation
-   * @param   string      $type         Defines initial font measurement unit (default is 'px')
+   * @param   string      $unit         Defines initial font measurement unit (default is 'px')
    * @param   bool        $impt         Make it !important
    * @param   bool        $echo         Echo the output if True
    *
    * @return  string
    *===========================================*/
-  function fontsize($fontsize,$lineheight,$type='px',$impt=null,$echo=null) {
+  public function fontsize($fontsize,$lineheight,$unit='px',$impt=null,$echo=true) {
 
-    $string   = '';
+    $string         = '';
 
     // Is this !important...
-    $important = $this->important($impt);
+    $important      = $this->_important($impt);
 
     // Take the decimal out of our arguments
-    $fontsize_rem = $fontsize;
-    $fontsize     = str_replace('.', '', $fontsize);
-
+    $fontsize_rem   = $fontsize;
+    $fontsize       = str_replace('.', '', $fontsize);
     $lineheight_rem = $lineheight;
-    $lineheight   = str_replace('.', '', $lineheight);
+    $lineheight     = str_replace('.', '', $lineheight);
 
     // Define the arrays we'll iterate through to generate the markup
     $vals = array(
@@ -291,19 +338,66 @@ class PHPCSS {
 
     // Iterate through our $types and generate the markup
     foreach ($vals as $val) {
-      $string .= $val[0].': '.$val[1].$type.$important.'; ';
+      $string .= $val[0].': '.$val[1].$unit.$important.'; ';
       $string .= $val[0].': '.$val[2].'rem'.$important.'; ';
     }
 
-    // Return or output our string
-    if ($echo == null) :
-      return $string;
-    else :
-      echo $string;
-    endif;
+    // Output our CSS
+    $this->_echo($echo, $string);
 
   } // fontsize() {...}
 
+
+  /**
+   * Outputs a list of @font-face webfonts
+   * @since   1.3
+   *
+   * @return  false
+   *===========================================*/
+  public function generate_webfonts() {
+
+    $font_dir  = $this->fonts_dir;
+    $font_list = $this->font_list;
+    $font_face = '';
+
+    $stripped  = '';
+
+    $font_face = "\r\n\r\n/**------------------------ @FONT-FACE ------------------------*/\r\n";
+
+    foreach ($font_list as $font => $weights) :
+
+      foreach ($weights as $weight) :
+
+        $font_location = $font_dir.$font.'/'.$weight;
+
+        // Give us a clean name we can use - delimited by font weight per the file name
+        $stripped  = preg_replace('/\-webfont/', '', $weight);
+        $stripped  = preg_replace('/\-/', '', $stripped);
+
+        // Generate our source and append it to our $font_face string
+        $font_face .= "
+@font-face {
+  font-family: '$stripped';
+  src: url('$font_location.eot');
+  src: url('$font_location.eot?#iefix') format('embedded-opentype'),
+  url('$font_location.woff') format('woff'),
+  url('$font_location.ttf') format('truetype'),
+  url('$font_location.svgz#$stripped') format('svg'),
+  url('$font_location.svg#$stripped') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+";
+      endforeach; // foreach ($fonts as $font)
+
+    endforeach; // foreach ($font_list as $fonts)
+
+    // Output our $font_face string
+    echo $font_face;
+
+    return false;
+
+  } // generate_webfonts()
 
 
   /**
@@ -315,18 +409,43 @@ class PHPCSS {
    *
    * @return  string
    *===========================================*/
-  private function important($impt) {
+  private function _important($impt) {
 
     $important = '';
 
     // If it's important, append !important to our output
-    if ($impt !== null && $impt !== false && $impt !== 0) :
+    if ($impt) :
       $important = ' !important';
     endif;
 
     return $important;
 
   } // important()
+
+
+  /**
+   * Tests and returns or echoes our value
+   *
+   * @since   1.3
+   *
+   * @param   bool      $echo           Echo the supplied string
+   * @param   string    $string         The string to be echoed or returned
+   *
+   * @return  string
+   *===========================================*/
+  private function _echo($echo, $string) {
+
+    // Return or output our string
+    if ($echo) :
+      echo $string;
+    else :
+      return $string;
+    endif;
+
+  } // echo ()
+
+
+
 
 
 
@@ -374,22 +493,39 @@ class PHPCSS {
  *
  *============================================================================*/
 
-
   /**
    * Called at the end of your file; This method generates a static CSS file ready for production
    *
-   * @since   1.2
+   * @todo need to add different $minify flags to customize the minified output
+   *
+   * @since   1.3  .::.  Officially implemented in 1.3 - Designed in 1.2
    *
    * @param   bool      $minify         Calls the minification script when True to compress the generated CSS file
+   * @param   string    $file_name      Override the default filename of the generated stylesheet - default is "style.css"
+   * @param   string    $target_dir     Override the default output directory - default is the same direcotyr as source file
    *
    * @return  bool      false           Outputs a static .css file
    *===========================================*/
-  function generate_css($minify=null) {
+  function generate_stylesheet($minify=null, $file_name='style.css', $target_dir=__DIR__) {
+
+    $stylecssphp = file_get_contents('http://localhost/github/PHPCSS/style.css.php');
+    //
+    // $docroot = $_SERVER['DOCUMENT_ROOT'];
+
+    echo $stylecssphp;
+
+    echo $target_dir;
+
+    echo $_SERVER['DOCUMENT_ROOT'];
 
     // Figure out what directory we're in
     //   Designate in a variable
     $source_directory       = '';
     $destination_directory  = '';
+
+    // Define a regex to strip the server hostname
+    $baseurl_regex = '/http(s)?:\/\/\S+?\//';
+
 
     // Call the source file
     //   Read in the contents
@@ -397,7 +533,7 @@ class PHPCSS {
     // Determine what "header" comment blocks are present and maintain them in a variable
 
     // Are we minifying the source?
-    if ($minify !== null) :
+    if ($minify) :
 
       // Minify source code
 
@@ -411,6 +547,45 @@ class PHPCSS {
     return false;
 
   } // generate_css($minify) {...}
+
+
+  /**
+   * Mods a provided hex code depending on the paramater passed to it
+   *
+   * @since   1.3
+   *
+   * @param   string    $color          The color HEX code that is to be modified
+   * @param   string    $mod_type       Defines the name of the color mod to be applied
+   * @param   float     $percentage     Defines the percentage the effect should have - Defaults to 50%
+   *
+   * @return  string    $mod_color      The final output string of our modded color
+   *===========================================*/
+  function color_mod($color, $mod_type='lighten', $percentage = 0.5) {
+
+    $color = '';
+    $modded_color = '';
+
+    switch ($mod_type) {
+      case 'lighten':
+        // Run color modification code here and write it back to $color
+
+        $modded_color = $color;
+        break;
+
+      case 'darken':
+        // Run color modification code here and write it back to $color
+
+        $modded_color = $color;
+
+        break;
+
+    } // switch ($mod_type)
+
+    // Print our modded color value
+    return $modded_color;
+
+  } // color_mod()
+
 
 
 

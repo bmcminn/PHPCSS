@@ -34,7 +34,7 @@
   require_once('inc/class.PHPCSS.php');
 
   // Instantiate a new CSS() object
-  $example = new PHPCSS();
+  $css = new PHPCSS();
 
 
   // Include our resource files
@@ -45,27 +45,26 @@
 
 
 /**
-* ------------------------ START YOUR STYLES HERE! ------------------------- *
-*/
+ * ------------------------ START YOUR STYLES HERE! ------------------------- *
+ */
 
 
 
 /* Use the border_radius wrapper method */
-#test-border-radius { <?php $example->border_radius('4px'); ?> }
-
+#test-border-radius { <?php $css->border_radius('4px'); ?> }
 
 /* Use the gradient wrapper method */
-#test-gradient-1 { <?php $example->gradient('linear','-45deg,'.RED.','.BLUE); ?> }
-#test-gradient-2 { <?php $example->gradient('radial','-45deg,red,blue'); ?> }
+#test-gradient-1 { <?php $css->gradient('linear','-45deg,'.RED.','.BLUE); ?> }
+#test-gradient-2 { <?php $css->gradient('radial','-45deg,red,blue'); ?> }
 
 
 /* Use the box_shadow wrapper method */
-#test-box-shadow { <?php $example->box_shadow('0 2px 0 #bada55',1); ?> }
+#test-box-shadow { <?php $css->box_shadow('0 2px 0 #bada55',1); ?> }
 
 
 /* All previous methods wrap the prefixit() method */
 /* Call this method if you want to get REALLY specific */
-#test-prefixed-styles { <?php $example->prefixit('border-radius','5px',1); ?> }
+#test-prefixed-styles { <?php $css->prefixit('border-radius','5px',1); ?> }
 
 
 <?php
@@ -111,3 +110,15 @@
 @media screen and (max-width: 980px) {
 
 } // @media max-width: 980px
+
+
+
+
+
+
+
+<?php
+
+  // $css->generate_stylesheet();
+
+?>
