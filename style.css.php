@@ -3,7 +3,6 @@
   header('content-type: text/css');
 
 
-
   // Define custom color/font/directory values
   // NOTE: DON'T CHANGE UNLESS ABSOLUTELY NECESSARY!!!
   define('CHARSET', 'UTF-8');
@@ -25,10 +24,8 @@
   define('ORANGE', '#f90');
 
 
-
   // Define our charset encoding
   echo '@charset "'.CHARSET.'";'."\r\n";
-
 
   // Include the PHPCSS class file
   require_once('inc/class.PHPCSS.php');
@@ -43,11 +40,9 @@
 ?>
 
 
-
 /**
  * ------------------------ START YOUR STYLES HERE! ------------------------- *
  */
-
 
 
 /* Use the border_radius wrapper method */

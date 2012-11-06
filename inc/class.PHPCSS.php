@@ -5,7 +5,7 @@
  * PHP based CSS pseudo-processor class that supplies numerous helper methods for CSS script generation
  *
  * @package      PHPCSS
- * @version      1.3
+ * @version      1.4
  * @author       Brandtley McMinn <labs@giggleboxstudios.net>
  * @copyright    2011-2012 Brandtley McMinn
  * @license      http://creativecommons.org/licenses/by-sa/3.0/legalcode - CC BY-SA 3.0
@@ -17,6 +17,11 @@
  *
  * CHANGE LOG:
  * -----------------------------------------------------------------------------
+ *
+ *  08/09/2012:
+ *    - Added grid system generation via int or array of integers
+ *      - Generates a list of percentage based column widths for easy fluid/responsive grid templating
+ *
  *
  *  08/02/2012:
  *    - Corrected an error in set_vendors() method; running recursive function instead of setting the $vendors class var
@@ -84,6 +89,7 @@ class PHPCSS {
   var $font_list  = array();
 
 
+
   /**
    * Constructor - Not sure what to do here yet...
    * @since 1.0
@@ -98,6 +104,7 @@ class PHPCSS {
     endif;
 
   } // __construct()
+
 
 
   /**
@@ -138,12 +145,10 @@ class PHPCSS {
    * @return  false
    *===========================================*/
   function set_vendors($vendors = array()) {
-
     $this->set_vendors($vendors);
-
     return false;
-
   } // set_vendors() {...}
+
 
 
   /**
@@ -153,11 +158,10 @@ class PHPCSS {
    * @return  false
    *===========================================*/
   public function set_fonts_dir($dir = '') {
-
     $this->fonts_dir = $dir;
     return false;
-
   } // set_fonts_dir() {...}
+
 
 
   /**
@@ -167,11 +171,10 @@ class PHPCSS {
    * @return  false
    *===========================================*/
   public function set_font_list($list = array()) {
-
     $this->font_list = $list;
     return false;
-
   } // set_fonts_dir() {...}
+
 
 
   /**
@@ -211,6 +214,7 @@ class PHPCSS {
   } // prefixit() {...}
 
 
+
   /**
    * Outputs vendor prefixed border-radius attributes
    *
@@ -234,6 +238,7 @@ class PHPCSS {
   } // border_radius() {...}
 
 
+
   /**
    * Outputs vendor prefixed box-shadow attributes
    *
@@ -255,6 +260,7 @@ class PHPCSS {
     return $this->prefixit($attr, $args, $impt, $echo);
 
   } // box_shadow() {...}
+
 
 
   /**
@@ -293,6 +299,7 @@ class PHPCSS {
     $this->_echo($echo, $string);
 
   } // gradient() {...}
+
 
 
   /**
@@ -348,6 +355,7 @@ class PHPCSS {
   } // fontsize() {...}
 
 
+
   /**
    * Outputs a list of @font-face webfonts
    * @since   1.3
@@ -400,6 +408,58 @@ class PHPCSS {
   } // generate_webfonts()
 
 
+
+  /**
+   * Generates a list of grid fluid-width values based on a predefined column count
+   *
+   * @since   1.4
+   *
+   * @param   int       $count          Number of grid sizes to be generated
+   * @param   array     $count          An array of grid sizes to be generated
+   *
+   * @return  string
+   *===========================================*/
+  public function grid($count) {
+
+    $array = array();
+
+    // Add the integer to an index of our empty array
+    if (is_int($count)) :
+      $array[] = $count;
+
+    else :
+      $array = $count;
+
+    endif;
+
+    // Generate our grid
+    foreach ($array as $index) {
+
+      // Reset our variables
+      $i = 0;
+      $width = 0;
+
+      // Get the size of the grid and round it up to the nearest hudredth
+      $size = 100 / $index;
+
+      // Generate the grid sizes per our grid count
+      while ($i < $index) :
+        $i += 1;
+
+        $width = $size * $i;
+
+        echo ".grid-$index .column-$i\t{ width: $width%; }\r\n";
+
+      endwhile;
+
+      echo "\r\n";
+
+    }
+
+  } // grid()
+
+
+
   /**
    * Tests and returns if our value is !important or not
    *
@@ -421,6 +481,7 @@ class PHPCSS {
     return $important;
 
   } // important()
+
 
 
   /**
@@ -547,6 +608,7 @@ class PHPCSS {
     return false;
 
   } // generate_css($minify) {...}
+
 
 
   /**
